@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector('.mobile-menu');
     const overlay = document.querySelector('.mobile-menu-overlay');
     const body = document.querySelector('body');
+    const header = document.querySelector('header');
+    const mainNav = document.querySelector('.main-nav');
 
     function toggleMenu() {
         hamburger.classList.toggle('active');
@@ -30,5 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Prevent clicks inside mobile menu from closing it
     mobileMenu.addEventListener('click', (e) => {
         e.stopPropagation();
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            mainNav.classList.add('header-scrolled');
+        } else {
+            mainNav.classList.remove('header-scrolled');
+        }
     });
 }); 
