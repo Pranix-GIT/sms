@@ -800,3 +800,112 @@ main {
     transform: scale(1.1);
     background: rgba(0, 0, 0, 0.2);
 }
+
+/* Update notice popup styles */
+.notice-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Add blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    max-width: 550px;
+    width: auto;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+.notice-content {
+    position: relative;
+    max-width: 500px; /* Added max-width for content */
+    margin: 0 auto; /* Center the content */
+}
+
+.notice-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.notice-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #FF6B6B;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.notice-close:hover {
+    background: #ff5252;
+    transform: scale(1.1);
+}
+
+/* Animation for notice popup */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -48%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Update overlay for notice */
+.notice-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 1000vw;
+    height: 1000vh;
+    background: rgba(0, 0, 0, 0.9); /* Darker background */
+    backdrop-filter: blur(8px); /* Increased blur */
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1999;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .notice-popup {
+        width: 85%;
+        padding: 15px;
+    }
+
+    .notice-close {
+        top: -12px;
+        right: -12px;
+        width: 25px;
+        height: 25px;
+        font-size: 18px;
+    }
+
+    .notice-overlay {
+        background: rgba(0, 0, 0, 0.95); /* Even darker for mobile */
+        backdrop-filter: blur(10px); /* More blur for mobile */
+        -webkit-backdrop-filter: blur(10px);
+    }
+}

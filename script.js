@@ -79,4 +79,46 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleVideoModal();
         }
     });
+
+    // Add notice overlay to body
+    const noticeOverlay = document.createElement('div');
+    noticeOverlay.className = 'notice-overlay';
+    document.body.appendChild(noticeOverlay);
+
+    // Notice popup functionality
+    const noticePopup = document.querySelector('.notice-popup');
+    const noticeClose = document.querySelector('.notice-close');
+
+    function closeNotice() {
+        noticePopup.style.animation = 'fadeOut 0.3s ease forwards';
+        noticeOverlay.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => {
+            noticePopup.style.display = 'none';
+            noticeOverlay.style.display = 'none';
+        }, 300);
+    }
+
+    noticeClose.addEventListener('click', closeNotice);
+    noticeOverlay.addEventListener('click', closeNotice);
+
+    // Close notice with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeNotice();
+        }
+    });
+
+    // Add fadeOut animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 }); 
