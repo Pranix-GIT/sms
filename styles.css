@@ -176,14 +176,14 @@ header {
     cursor: pointer;
 }
 
-/* Orbit System */
+/* Orbit System - Updated sizes and positioning */
 .orbit-system {
     position: absolute;
     top: 50%;
-    right: 10%;
+    right: 5%; /* Moved more to the right from 10% to 5% */
     transform: translateY(-50%);
-    width: 500px;
-    height: 500px;
+    width: 600px; /* Increased from 500px to 600px */
+    height: 600px;
 }
 
 .orbit {
@@ -207,50 +207,94 @@ header {
     transform-origin: center;
 }
 
-/* Orbit sizes and positions */
+.orbit-icon i {
+    color: white;
+    font-size: 22px; /* Slightly larger icons */
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+}
+
+/* Hover effect for icons */
+.orbit-icon:hover i {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Updated vibrant colors for each orbit */
+.orbit-1 .orbit-icon {
+    background: #FF6B6B;  /* Red - Education */
+}
+
+.orbit-2 .orbit-icon {
+    background: #4ECDC4;  /* Turquoise - Sports */
+}
+
+.orbit-3 .orbit-icon {
+    background: #FFD93D;  /* Yellow - Reading */
+}
+
+.orbit-4 .orbit-icon {
+    background: #6C63FF;  /* Purple - Games */
+}
+
+.orbit-5 .orbit-icon {
+    background: #FF9F43;  /* Orange - Science */
+}
+
+/* Updated orbit sizes */
 .orbit-1 { 
-    width: 200px; 
-    height: 200px; 
+    width: 240px; /* Increased from 200px */
+    height: 240px; 
 }
 .orbit-1 .orbit-icon {
-    transform-origin: 100px;
+    transform-origin: 120px;
     animation: orbit 20s linear infinite;
-    animation-delay: -5s; /* Random start position */
-    background: #FF6B6B;
+    animation-delay: -5s;
 }
 
 .orbit-2 { 
-    width: 300px; 
-    height: 300px; 
+    width: 360px; /* Increased from 300px */
+    height: 360px; 
 }
 .orbit-2 .orbit-icon {
-    transform-origin: 150px;
+    transform-origin: 180px;
     animation: orbit 25s linear infinite;
-    animation-delay: -15s; /* Random start position */
-    background: #4ECDC4;
+    animation-delay: -15s;
 }
 
 .orbit-3 { 
-    width: 400px; 
-    height: 400px; 
+    width: 480px; /* Increased from 400px */
+    height: 480px; 
 }
 .orbit-3 .orbit-icon {
-    transform-origin: 200px;
+    transform-origin: 240px;
     animation: orbit 30s linear infinite;
-    animation-delay: -8s; /* Random start position */
-    background: #FFD93D;
+    animation-delay: -8s;
 }
 
 .orbit-4 { 
-    width: 500px; 
-    height: 500px; 
+    width: 600px; /* Increased from 500px */
+    height: 600px; 
 }
 .orbit-4 .orbit-icon {
-    transform-origin: 250px;
+    transform-origin: 300px;
     animation: orbit 35s linear infinite;
-    animation-delay: -12s; /* Random start position */
-    background: #6C63FF;
+    animation-delay: -12s;
 }
+
+/* New outer orbit */
+.orbit-5 { 
+    width: 720px;
+    height: 720px; 
+}
+.orbit-5 .orbit-icon {
+    transform-origin: 360px;
+    animation: orbit 40s linear infinite;
+    animation-delay: -20s;
+    background: #FF9F43; /* New color for the outer orbit */
+}
+
+/* Add position for the new orbit icon */
+.orbit-5 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
 
 /* Single orbit animation for all icons */
 @keyframes orbit {
@@ -260,11 +304,6 @@ header {
     to {
         transform: rotate(360deg) translateX(0) rotate(-360deg);
     }
-}
-
-.orbit-icon i {
-    color: white;
-    font-size: 20px;
 }
 
 /* Position icons on their orbits */
