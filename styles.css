@@ -32,8 +32,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 4rem;
+    padding: 0.8rem 4rem;
     transition: all 0.3s ease;
+    height: 70px;
 }
 
 .nav-left {
@@ -45,11 +46,23 @@ header {
 .logo {
     display: flex;
     align-items: center;
+    height: 45px;
+    overflow: hidden;
+    padding-top: 5px;
 }
 
 .logo img {
-    height: 40px;
+    height: 55px;
     width: auto;
+    margin-top: 0px;
+    object-fit: contain;
+    transform: scale(1.1);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
 }
 
 .nav-links {
@@ -58,20 +71,15 @@ header {
     align-items: center;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
 .nav-link {
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 600;
+    font-weight: 400;
     font-size: 0.9rem;
     transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
+    letter-spacing: 0.5px;
 }
 
 .nav-link::after {
@@ -95,13 +103,14 @@ header {
     border: none;
     padding: 0.8rem 2rem;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     z-index: 1;
+    letter-spacing: 0.5px;
 }
 
 .admission-btn::before {
@@ -408,6 +417,8 @@ header {
     margin-left: auto; /* Center the button */
     margin-right: auto;
     max-width: 200px; /* Optional: limit button width */
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 .menu-divider {
@@ -434,6 +445,8 @@ header {
     max-width: 200px; /* Optional: limit link width */
     animation: fadeInUp 0.3s ease forwards;
     opacity: 0;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 .mobile-nav .nav-link:nth-child(1) { animation-delay: 0.1s; }
@@ -479,8 +492,17 @@ header {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .logo {
+        padding-top: 3px;
+    }
+    
+    .logo img {
+        height: 50px;
+    }
+
     .main-nav {
-        padding: 1rem 2rem;
+        padding: 0.8rem 2rem;
+        height: 65px;
     }
 
     .desktop-menu {
@@ -634,6 +656,10 @@ header {
     @keyframes orbit4 {
         from { transform: translate(-50%, -50%) rotate(0deg) translateX(170px) rotate(0deg); }
         to { transform: translate(-50%, -50%) rotate(360deg) translateX(170px) rotate(-360deg); }
+    }
+
+    .nav-right {
+        gap: 1rem;
     }
 }
 
