@@ -130,10 +130,10 @@ header {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Section */
+/* Hero Section - Updated spacing */
 .hero {
     position: relative;
-    margin: 2rem 4rem;
+    margin: 4rem 4rem 2rem; /* Increased top margin from 2rem to 4rem */
     background: linear-gradient(135deg, var(--primary-color), #3D8873);
     border-radius: 24px;
     min-height: 500px;
@@ -200,29 +200,78 @@ header {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    transform-origin: center;
 }
 
-/* Orbit sizes */
-.orbit-1 { width: 200px; height: 200px; }
-.orbit-2 { width: 300px; height: 300px; }
-.orbit-3 { width: 400px; height: 400px; }
-.orbit-4 { width: 500px; height: 500px; }
+/* Orbit sizes and positions */
+.orbit-1 { 
+    width: 200px; 
+    height: 200px; 
+}
+.orbit-1 .orbit-icon {
+    transform-origin: 100px;
+    animation: orbit 20s linear infinite;
+    animation-delay: -5s; /* Random start position */
+    background: #FF6B6B;
+}
 
-/* Icon colors and positions */
-.orbit-1 .orbit-icon { background: #FF6B6B; }
-.orbit-2 .orbit-icon { background: #4ECDC4; }
-.orbit-3 .orbit-icon { background: #FFD93D; }
-.orbit-4 .orbit-icon { background: #6C63FF; }
+.orbit-2 { 
+    width: 300px; 
+    height: 300px; 
+}
+.orbit-2 .orbit-icon {
+    transform-origin: 150px;
+    animation: orbit 25s linear infinite;
+    animation-delay: -15s; /* Random start position */
+    background: #4ECDC4;
+}
+
+.orbit-3 { 
+    width: 400px; 
+    height: 400px; 
+}
+.orbit-3 .orbit-icon {
+    transform-origin: 200px;
+    animation: orbit 30s linear infinite;
+    animation-delay: -8s; /* Random start position */
+    background: #FFD93D;
+}
+
+.orbit-4 { 
+    width: 500px; 
+    height: 500px; 
+}
+.orbit-4 .orbit-icon {
+    transform-origin: 250px;
+    animation: orbit 35s linear infinite;
+    animation-delay: -12s; /* Random start position */
+    background: #6C63FF;
+}
+
+/* Single orbit animation for all icons */
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(0) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(0) rotate(-360deg);
+    }
+}
 
 .orbit-icon i {
     color: white;
     font-size: 20px;
 }
+
+/* Position icons on their orbits */
+.orbit-1 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
+.orbit-2 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
+.orbit-3 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
+.orbit-4 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
 
 /* Add Font Awesome for icons */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
@@ -434,6 +483,6 @@ header {
 
 /* Add this to maintain layout with fixed header */
 main {
-    margin-top: 80px; /* Adjust based on your header height */
+    margin-top: 100px; /* Increased from 80px to 100px */
     position: relative;
 } 
