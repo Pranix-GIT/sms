@@ -46,17 +46,17 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    height: 45px;
+    height: 42px;
     overflow: hidden;
-    padding-top: 5px;
+    padding-top: 1px;
 }
 
 .logo img {
-    height: 55px;
+    height: 48px;
     width: auto;
-    margin-top: 0px;
+    margin-top: -1px;
     object-fit: contain;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .nav-right {
@@ -493,11 +493,11 @@ header {
 /* Responsive Styles */
 @media (max-width: 768px) {
     .logo {
-        padding-top: 3px;
+        padding-top: 1px;
     }
     
     .logo img {
-        height: 50px;
+        height: 45px;
     }
 
     .main-nav {
