@@ -537,13 +537,13 @@ header {
         padding: 1.5rem;
         grid-template-columns: 1fr;
         position: relative;
-        padding-top: 3rem; /* Added more top padding */
+        padding-top: 2rem; /* Decreased from 3rem */
     }
 
     .hero-content {
         text-align: center;
-        padding-bottom: 320px;
-        padding-top: 1.5rem; /* Added top padding */
+        padding-bottom: 280px; /* Decreased from 320px */
+        padding-top: 0.8rem; /* Decreased from 1.5rem */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -552,18 +552,18 @@ header {
 
     .hero-content h1 {
         font-size: 2rem;
-        margin-bottom: 1rem;
-        margin-top: 1rem; /* Added top margin */
+        margin-bottom: 0.8rem; /* Decreased from 1rem */
+        margin-top: 0.5rem; /* Decreased from 1rem */
     }
 
     .hero-content p {
         font-size: 0.9rem;
-        margin-bottom: 1.5rem; /* Increased bottom margin */
+        margin-bottom: 1.2rem; /* Decreased from 1.5rem */
         padding: 0 0.8rem;
     }
 
     .cta-button {
-        margin-top: 0.5rem; /* Added top margin to button */
+        margin-top: 0.3rem; /* Decreased from 0.5rem */
     }
 
     .play-icon {
