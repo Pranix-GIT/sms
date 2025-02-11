@@ -1,11 +1,8 @@
 :root {
-    --primary-color: #2AB088;
+    --primary-color: #55B79D;
     --secondary-color: #FFD43B;
     --text-color: #333333;
     --background-color: #FFFFFF;
-    --border-radius: 20px;
-    --container-padding: clamp(1rem, 5vw, 4rem);
-    --section-spacing: clamp(2rem, 5vw, 4rem);
 }
 
 * {
@@ -16,91 +13,60 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
     background-color: #F5F5F5;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-.container {
-    width: min(100% - 2rem, 1200px);
-    margin-inline: auto;
-    padding: 0 var(--container-padding);
-}
-
-.dots-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 150px;
-    background-image: radial-gradient(circle, #ffffff 2px, transparent 2px);
-    background-size: 15px 15px;
-    opacity: 0.5;
-}
-
-/* Header Auto Layout */
+/* Header Styles */
 .main-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem var(--container-padding);
-    gap: 2rem;
-    flex-wrap: wrap;
+    padding: 1.5rem 4rem;
+    background: white;
 }
 
-.logo {
-    flex-shrink: 0;
-}
-
-.logo img {
-    height: clamp(40px, 5vw, 50px);
-    width: auto;
-}
-
-.nav-links {
+.nav-left {
     display: flex;
-    gap: clamp(1.5rem, 3vw, 3rem);
-    margin-left: auto;
-    flex-wrap: wrap;
+    gap: 2rem;
 }
 
-.nav-links a {
+.nav-link {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 600;
-    font-size: clamp(0.875rem, 1vw, 1rem);
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
+    font-size: 0.9rem;
 }
 
-.nav-links a.active {
-    color: var(--primary-color);
+.search-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #F5F5F5;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
-/* Hero Section Auto Layout */
+/* Hero Section */
 .hero {
     position: relative;
-    background: linear-gradient(135deg, var(--primary-color), #1a8f6e);
-    border-radius: var(--border-radius);
-    padding: 4rem;
-    margin: 2rem auto;
-    overflow: hidden;
-    min-height: 600px;
+    margin: 2rem 4rem;
+    background: linear-gradient(135deg, var(--primary-color), #3D8873);
+    border-radius: 24px;
+    min-height: 500px;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 2rem;
-    max-width: 1400px;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    padding: 4rem;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
     color: white;
+    max-width: 600px;
+    z-index: 2;
 }
 
 .hero-content h1 {
@@ -114,7 +80,7 @@ body {
     font-size: 1.1rem;
     margin-bottom: 2rem;
     opacity: 0.9;
-    max-width: 500px;
+    line-height: 1.6;
 }
 
 .cta-button {
@@ -122,56 +88,22 @@ body {
     border: none;
     padding: 1rem 2rem;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--text-color);
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
-.cta-button:hover {
-    transform: translateY(-2px);
-}
-
-/* Solar System Styles */
-.solar-system {
+/* Orbit System */
+.orbit-system {
     position: absolute;
-    right: -150px;
     top: 50%;
+    right: 10%;
     transform: translateY(-50%);
-    width: 800px;
-    height: 800px;
-}
-
-.astronaut {
-    position: absolute;
-    top: 65%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-
-    z-index: 5;
-}
-
-.astronaut img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
-}
-
-.orbit-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    perspective: 1000px;
-    transform-style: preserve-3d;
+    width: 500px;
+    height: 500px;
 }
 
 .orbit {
@@ -179,516 +111,38 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    animation: rotate linear infinite;
 }
 
-.planet {
+.orbit-icon {
     position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
-    transition: transform 0.3s ease;
-}
-
-/* Orbit sizes and speeds */
-.orbit-1 { width: 200px; height: 200px; animation-duration: 20s; }
-.orbit-2 { width: 300px; height: 300px; animation-duration: 25s; }
-.orbit-3 { width: 400px; height: 400px; animation-duration: 30s; }
-.orbit-4 { width: 500px; height: 500px; animation-duration: 35s; }
-.orbit-5 { width: 600px; height: 600px; animation-duration: 40s; }
-
-/* Vibrant planet colors with stronger gradients */
-.planet-pink {
-    background: linear-gradient(45deg, #FF1493, #FF69B4);
-    box-shadow: 0 0 25px rgba(255,20,147,0.6);
-}
-
-.planet-blue {
-    background: linear-gradient(45deg, #00BFFF, #1E90FF);
-    box-shadow: 0 0 25px rgba(0,191,255,0.6);
-}
-
-.planet-purple {
-    background: linear-gradient(45deg, #9400D3, #8A2BE2);
-    box-shadow: 0 0 25px rgba(148,0,211,0.6);
-}
-
-.planet-teal {
-    background: linear-gradient(45deg, #00CED1, #20B2AA);
-    box-shadow: 0 0 25px rgba(0,206,209,0.6);
-}
-
-.planet-gold {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    box-shadow: 0 0 25px rgba(255,215,0,0.6);
-}
-
-.planet-rose {
-    background: linear-gradient(45deg, #FF3366, #FF6B6B);
-    box-shadow: 0 0 25px rgba(255,51,102,0.6);
-}
-
-.planet-violet {
-    background: linear-gradient(45deg, #9932CC, #8B008B);
-    box-shadow: 0 0 25px rgba(153,50,204,0.6);
-}
-
-.planet-cyan {
-    background: linear-gradient(45deg, #00FFFF, #00CED1);
-    box-shadow: 0 0 25px rgba(0,255,255,0.6);
-}
-
-.planet-amber {
-    background: linear-gradient(45deg, #FFB300, #FF8C00);
-    box-shadow: 0 0 25px rgba(255,179,0,0.6);
-}
-
-.planet-lime {
-    background: linear-gradient(45deg, #32CD32, #00FF00);
-    box-shadow: 0 0 25px rgba(50,205,50,0.6);
-}
-
-.planet-coral {
-    background: linear-gradient(45deg, #FF6347, #FF4500);
-    box-shadow: 0 0 25px rgba(255,99,71,0.6);
-}
-
-.planet-indigo {
-    background: linear-gradient(45deg, #4B0082, #6A5ACD);
-    box-shadow: 0 0 25px rgba(75,0,130,0.6);
-}
-
-.planet-emerald {
-    background: linear-gradient(45deg, #2ECC71, #00FF7F);
-    box-shadow: 0 0 25px rgba(46,204,113,0.6);
-}
-
-/* White planet with stronger glow */
-.planet-white {
     background: white;
-    box-shadow: 0 0 25px rgba(255,255,255,0.8);
-}
-
-/* Enhanced icon styles */
-.icon-white {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-    opacity: 1;
-}
-
-/* Colored icons with vibrant colors */
-.planet-white .icon-color {
-    width: 22px;
-    height: 22px;
-    opacity: 1;
-}
-
-/* Specific colored icons for white backgrounds */
-.planet-white .icon-color.math-icon {
-    filter: invert(23%) sepia(98%) saturate(2136%) hue-rotate(260deg) brightness(94%) contrast(94%);  /* Vibrant Purple */
-}
-
-.planet-white .icon-color.science-icon {
-    filter: invert(62%) sepia(72%) saturate(4832%) hue-rotate(157deg) brightness(97%) contrast(101%);  /* Vibrant Teal */
-}
-
-.planet-white .icon-color.art-icon {
-    filter: invert(37%) sepia(74%) saturate(1095%) hue-rotate(156deg) brightness(96%) contrast(101%);  /* Vibrant Green */
-}
-
-.planet-white .icon-color.music-icon {
-    filter: invert(14%) sepia(88%) saturate(6120%) hue-rotate(358deg) brightness(98%) contrast(113%);  /* Vibrant Red */
-}
-
-/* Enhanced hover effects */
-.planet:hover {
-    transform: translateX(-50%) scale(1.2);
-    box-shadow: 0 0 35px rgba(255,255,255,0.8);
-}
-
-.planet:hover .icon-white {
-    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,1));
-    transform: scale(1.1);
-}
-
-.planet:hover .icon-color {
-    filter: drop-shadow(0 0 8px rgba(255,255,255,1));
-    transform: scale(1.1);
-}
-
-/* Responsive Styles */
-@media (max-width: 1400px) {
-    .solar-system {
-        transform: translateY(-50%) scale(0.8);
-        right: -120px;
-    }
-}
-
-@media (max-width: 992px) {
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 3rem;
-    }
-
-    .solar-system {
-        transform: scale(0.6);
-        right: -80px;
-    }
-
-    .hero-content {
-        margin: 0 auto;
-        max-width: 600px;
-    }
-}
-
-/* Learning Cards Auto Layout */
-.learning-section {
-    padding: var(--section-spacing);
-}
-
-.section-header {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-.learning-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-    gap: clamp(1rem, 3vw, 2rem);
-    padding: 1rem;
+/* Orbit sizes */
+.orbit-1 { width: 200px; height: 200px; }
+.orbit-2 { width: 300px; height: 300px; }
+.orbit-3 { width: 400px; height: 400px; }
+.orbit-4 { width: 500px; height: 500px; }
+
+/* Icon colors and positions */
+.orbit-1 .orbit-icon { background: #FF6B6B; }
+.orbit-2 .orbit-icon { background: #4ECDC4; }
+.orbit-3 .orbit-icon { background: #FFD93D; }
+.orbit-4 .orbit-icon { background: #6C63FF; }
+
+.orbit-icon i {
+    color: white;
+    font-size: 20px;
 }
 
-.learning-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.learning-card:hover {
-    transform: translateY(-5px);
-}
-
-.search-container,
-.search-bar {
-    display: none;
-}
-
-/* Responsive Floating Icons */
-.floating-icons {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-.icon {
-    position: absolute;
-    width: 20px;
-    aspect-ratio: 1;
-    background: white;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    animation: iconFloat 3s ease-in-out infinite;
-}
-
-/* Media Queries for Responsive Layout */
-@media (max-width: 480px) {
-    .main-nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        justify-content: center;
-        width: 100%;
-    }
-}
-
-/* Animation Keyframes */
-@keyframes iconFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-/* Utility Classes for Future Use */
-.flex {
-    display: flex;
-}
-
-.flex-col {
-    flex-direction: column;
-}
-
-.grid {
-    display: grid;
-}
-
-.gap-1 { gap: 1rem; }
-.gap-2 { gap: 2rem; }
-.gap-3 { gap: 3rem; }
-
-.auto-cols {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-}
-
-.center {
-    display: grid;
-    place-items: center;
-}
-
-/* Orbit System */
-.orbit-system {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    animation: systemRotate 60s linear infinite;
-}
-
-/* Video Modal */
-.video-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    place-items: center;
-}
-
-.modal-content {
-    position: relative;
-    max-width: 800px;
-    width: 90%;
-    background: white;
-    border-radius: var(--border-radius);
-    padding: 1rem;
-}
-
-.close-modal {
-    position: absolute;
-    right: -1rem;
-    top: -1rem;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    border: none;
-    background: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* Animations */
-@keyframes systemRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Add subtle floating effect to planets */
-.planet {
-    animation: planetFloat 3s ease-in-out infinite;
-}
-
-@keyframes planetFloat {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* Updated icon styles */
-.icon-white {
-    width: 22px;
-    height: 22px;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
-}
-
-.icon-color {
-    width: 22px;
-    height: 22px;
-    filter: none;
-    opacity: 0.9;
-}
-
-/* Enhance icon animations */
-.icon-white, .icon-color {
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.planet:hover .icon-white {
-    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.8));
-}
-
-.planet:hover .icon-color {
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
-}
-
-/* Restore and enhance rotation animations */
-@keyframes rotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Planet rotation counter-animation to keep icons upright */
-.planet {
-    animation: counter-rotate linear infinite;
-    animation-duration: inherit;
-}
-
-@keyframes counter-rotate {
-    from { transform: translate(-50%, -50%) rotate(var(--start-angle)) translateX(calc(var(--orbit-size) / 2)) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(var(--start-angle)) translateX(calc(var(--orbit-size) / 2)) rotate(-360deg); }
-}
-
-/* Adjust container perspective for better 3D effect */
-.orbit-container {
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
-
-/* Add smooth transitions */
-.planet, .orbit {
-    transition: all 0.3s ease;
-}
-
-/* Adjust orbit sizes and speeds */
-.orbit-1 { width: 120px; height: 120px; animation-duration: 12s; }
-.orbit-2 { width: 200px; height: 200px; animation-duration: 15s; }
-.orbit-3 { width: 300px; height: 300px; animation-duration: 18s; }
-.orbit-4 { width: 400px; height: 400px; animation-duration: 21s; }
-.orbit-5 { width: 500px; height: 500px; animation-duration: 24s; }
-.orbit-6 { width: 600px; height: 600px; animation-duration: 27s; }
-.orbit-7 { width: 700px; height: 700px; animation-duration: 30s; }
-.orbit-8 { width: 800px; height: 800px; animation-duration: 33s; }
-.orbit-9 { width: 900px; height: 900px; animation-duration: 36s; }
-
-/* Adjust planet sizes based on orbit position */
-.orbit-1 .planet,
-.orbit-2 .planet {
-    width: 40px;
-    height: 40px;
-}
-
-.orbit-3 .planet,
-.orbit-4 .planet {
-    width: 45px;
-    height: 45px;
-}
-
-.orbit-5 .planet,
-.orbit-6 .planet,
-.orbit-7 .planet,
-.orbit-8 .planet,
-.orbit-9 .planet {
-    width: 50px;
-    height: 50px;
-}
-
-/* Adjust icon sizes accordingly */
-.orbit-1 .icon-white,
-.orbit-1 .icon-color,
-.orbit-2 .icon-white,
-.orbit-2 .icon-color {
-    width: 20px;
-    height: 20px;
-}
-
-.orbit-3 .icon-white,
-.orbit-3 .icon-color,
-.orbit-4 .icon-white,
-.orbit-4 .icon-color {
-    width: 22px;
-    height: 22px;
-}
-
-.orbit-5 .icon-white,
-.orbit-5 .icon-color,
-.orbit-6 .icon-white,
-.orbit-6 .icon-color,
-.orbit-7 .icon-color,
-.orbit-7 .icon-color,
-.orbit-8 .icon-color,
-.orbit-8 .icon-color,
-.orbit-9 .icon-white,
-.orbit-9 .icon-color {
-    width: 25px;
-    height: 25px;
-}
-
-/* Specific icon colors for white backgrounds */
-.planet-purple .icon-color {
-    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(270deg) brightness(104%) contrast(97%);
-}
-
-.planet-teal .icon-color {
-    filter: invert(49%) sepia(57%) saturate(385%) hue-rotate(127deg) brightness(97%) contrast(92%);
-}
-
-.planet-orange .icon-color {
-    filter: invert(65%) sepia(54%) saturate(2619%) hue-rotate(1deg) brightness(102%) contrast(106%);
-}
-
-/* Add axis lines for visual reference */
-.orbit::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translate(-50%, -50%);
-}
-
-.orbit-2::before {
-    transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.orbit-3::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.orbit-4::before {
-    transform: translate(-50%, -50%) rotate(135deg);
-}
-
-/* Enhance planet visibility */
-.planet {
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.9);
-}
-
-/* Add glow effect to axis intersections */
-.orbit::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-} 
+/* Add Font Awesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'); 
