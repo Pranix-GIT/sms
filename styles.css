@@ -724,7 +724,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.95); /* Darker background */
+    background: rgba(0, 0, 0, 0.9);
     z-index: 1100;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -745,52 +745,53 @@ main {
     transition: transform 0.3s ease;
 }
 
-/* Mobile responsive adjustments for video modal */
+.video-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: rotate(90deg);
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-    .video-modal {
-        background: black; /* Full black for mobile */
-    }
-
     .modal-content {
-        width: 100%; /* Full width */
-        height: 100vh; /* Full height */
-        max-width: none;
-        transform: scale(1);
-        display: flex;
-        align-items: center;
-    }
-
-    .video-container {
-        padding-bottom: 56.25%; /* Maintain 16:9 ratio */
-        width: 100%;
-        border-radius: 0; /* Remove border radius for full-screen feel */
+        width: 95%;
+        margin: 0 auto;
     }
 
     .close-modal {
-        top: 20px; /* Move close button to better position for mobile */
-        right: 20px;
-        font-size: 2rem;
-        z-index: 1200;
-        color: white;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Landscape mode adjustments */
-    @media (orientation: landscape) {
-        .modal-content {
-            height: auto;
-            margin: 20px;
-        }
-
-        .video-container {
-            padding-bottom: 50%; /* Slightly smaller for landscape */
-        }
+        top: -50px;
+        right: 10px;
     }
 }
 
