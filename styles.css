@@ -176,13 +176,13 @@ header {
     cursor: pointer;
 }
 
-/* Orbit System - Updated sizes and positioning */
+/* Orbit System */
 .orbit-system {
     position: absolute;
     top: 50%;
-    right: 5%; /* Moved more to the right from 10% to 5% */
+    right: 5%;
     transform: translateY(-50%);
-    width: 600px; /* Increased from 500px to 600px */
+    width: 600px;
     height: 600px;
 }
 
@@ -197,6 +197,8 @@ header {
 
 .orbit-icon {
     position: absolute;
+    top: 50%;
+    left: 50%;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -204,113 +206,78 @@ header {
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    transform-origin: center;
 }
 
+/* Orbit sizes */
+.orbit-1 { width: 240px; height: 240px; }
+.orbit-2 { width: 360px; height: 360px; }
+.orbit-3 { width: 480px; height: 480px; }
+.orbit-4 { width: 600px; height: 600px; }
+.orbit-5 { width: 720px; height: 720px; }
+
+/* Position and animate icons */
+.orbit-1 .orbit-icon {
+    transform-origin: center;
+    animation: orbit1 25s linear infinite;
+    background: #FF6B6B;
+}
+
+.orbit-2 .orbit-icon {
+    transform-origin: center;
+    animation: orbit2 30s linear infinite;
+    background: #4ECDC4;
+}
+
+.orbit-3 .orbit-icon {
+    transform-origin: center;
+    animation: orbit3 35s linear infinite;
+    background: #FFD93D;
+}
+
+.orbit-4 .orbit-icon {
+    transform-origin: center;
+    animation: orbit4 40s linear infinite;
+    background: #6C63FF;
+}
+
+.orbit-5 .orbit-icon {
+    transform-origin: center;
+    animation: orbit5 45s linear infinite;
+    background: #FF9F43;
+}
+
+/* Orbit animations */
+@keyframes orbit1 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg); }
+}
+
+@keyframes orbit3 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(240px) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg) translateX(240px) rotate(-360deg); }
+}
+
+@keyframes orbit4 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); }
+}
+
+@keyframes orbit5 {
+    from { transform: translate(-50%, -50%) rotate(0deg) translateX(360px) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg) translateX(360px) rotate(-360deg); }
+}
+
+/* Icon styles */
 .orbit-icon i {
     color: white;
-    font-size: 22px; /* Slightly larger icons */
-    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+    font-size: 20px;
+    display: block;
 }
-
-/* Hover effect for icons */
-.orbit-icon:hover i {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-}
-
-/* Updated vibrant colors for each orbit */
-.orbit-1 .orbit-icon {
-    background: #FF6B6B;  /* Red - Education */
-}
-
-.orbit-2 .orbit-icon {
-    background: #4ECDC4;  /* Turquoise - Sports */
-}
-
-.orbit-3 .orbit-icon {
-    background: #FFD93D;  /* Yellow - Reading */
-}
-
-.orbit-4 .orbit-icon {
-    background: #6C63FF;  /* Purple - Games */
-}
-
-.orbit-5 .orbit-icon {
-    background: #FF9F43;  /* Orange - Science */
-}
-
-/* Updated orbit sizes */
-.orbit-1 { 
-    width: 240px; /* Increased from 200px */
-    height: 240px; 
-}
-.orbit-1 .orbit-icon {
-    transform-origin: 120px;
-    animation: orbit 20s linear infinite;
-    animation-delay: -5s;
-}
-
-.orbit-2 { 
-    width: 360px; /* Increased from 300px */
-    height: 360px; 
-}
-.orbit-2 .orbit-icon {
-    transform-origin: 180px;
-    animation: orbit 25s linear infinite;
-    animation-delay: -15s;
-}
-
-.orbit-3 { 
-    width: 480px; /* Increased from 400px */
-    height: 480px; 
-}
-.orbit-3 .orbit-icon {
-    transform-origin: 240px;
-    animation: orbit 30s linear infinite;
-    animation-delay: -8s;
-}
-
-.orbit-4 { 
-    width: 600px; /* Increased from 500px */
-    height: 600px; 
-}
-.orbit-4 .orbit-icon {
-    transform-origin: 300px;
-    animation: orbit 35s linear infinite;
-    animation-delay: -12s;
-}
-
-/* New outer orbit */
-.orbit-5 { 
-    width: 720px;
-    height: 720px; 
-}
-.orbit-5 .orbit-icon {
-    transform-origin: 360px;
-    animation: orbit 40s linear infinite;
-    animation-delay: -20s;
-    background: #FF9F43; /* New color for the outer orbit */
-}
-
-/* Add position for the new orbit icon */
-.orbit-5 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
-
-/* Single orbit animation for all icons */
-@keyframes orbit {
-    from {
-        transform: rotate(0deg) translateX(0) rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg) translateX(0) rotate(-360deg);
-    }
-}
-
-/* Position icons on their orbits */
-.orbit-1 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
-.orbit-2 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
-.orbit-3 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
-.orbit-4 .orbit-icon { left: calc(50% - 22.5px); top: -22.5px; }
 
 /* Add Font Awesome for icons */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
