@@ -935,3 +935,241 @@ main {
         -webkit-backdrop-filter: blur(10px);
     }
 }
+
+/* Features Section Styles */
+.features-section {
+    padding: 3rem;
+    margin: 2rem auto;
+    max-width: 1400px;
+    width: calc(100% - 4rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start; /* Aligns both columns at the top */
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.features-left {
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.features-left h2 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.features-description {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.features-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 16/9;
+    margin-top: 2rem;
+    width: 100%;
+    position: relative;
+}
+
+.features-image img {
+    width: 100%;
+    height: 130%; /* Increased from 120% */
+    object-fit: cover;
+    object-position: center 40%; /* Changed from center top to center 40% */
+    display: block;
+    transition: transform 0.3s ease;
+    position: relative;
+    top: -15%; /* Adjusted from -10% to -15% */
+}
+
+.features-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Accordion Styles */
+.features-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accordion-item {
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-icon i {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.feature-text {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.expand-icon {
+    font-size: 1.5rem;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item.active {
+    background: var(--primary-color);
+}
+
+.accordion-item.active .accordion-button {
+    color: white;
+}
+
+.accordion-item.active .feature-icon {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.accordion-item.active .feature-icon i {
+    color: white;
+}
+
+.accordion-item.active .feature-text {
+    color: white;
+}
+
+.accordion-item.active .expand-icon {
+    transform: rotate(45deg);
+    color: white;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 0 1.2rem 1.2rem;
+    max-height: 200px;
+    color: white;
+}
+
+/* Notice Alert Styles */
+.notice-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.notice-alert i {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .features-section {
+        padding: 2.5rem;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .features-section {
+        grid-template-columns: 1fr;
+        width: calc(100% - 2rem);
+        margin: 1rem;
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .features-left h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .features-description {
+        text-align: center;
+    }
+
+    .accordion-button {
+        padding: 1rem;
+    }
+
+    .feature-icon {
+        min-width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .feature-text {
+        font-size: 0.9rem;
+    }
+
+    .accordion-content {
+        font-size: 0.9rem;
+    }
+
+    .features-image {
+        aspect-ratio: 16/10; /* Slightly taller on mobile */
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-section {
+        padding: 1rem;
+    }
+
+    .features-left h2 {
+        font-size: 1.8rem;
+    }
+}
