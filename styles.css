@@ -945,7 +945,6 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: start; /* Aligns both columns at the top */
     background: white;
     border-radius: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -953,9 +952,6 @@ main {
 
 .features-left {
     padding-right: 2rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
 .features-left h2 {
@@ -984,137 +980,20 @@ main {
 
 .features-image img {
     width: 100%;
-    height: 140%; /* Increased from 130% */
+    height: 140%;
     object-fit: cover;
-    object-position: center 30%; /* Changed from 40% to 30% to show higher part */
+    object-position: center 30%;
     display: block;
     transition: transform 0.3s ease;
     position: relative;
-    top: -20%; /* Changed from -15% to -20% */
+    top: -20%;
 }
 
 .features-image:hover img {
     transform: scale(1.05);
 }
 
-/* Accordion Styles */
-.features-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.accordion-item {
-    background: #f8f9fa;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.accordion-button {
-    width: 100%;
-    padding: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.3s ease;
-}
-
-.feature-icon {
-    font-size: 1.2rem;
-    min-width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-.feature-icon i {
-    color: var(--primary-color);
-    transition: all 0.3s ease;
-}
-
-.feature-text {
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.expand-icon {
-    font-size: 1.5rem;
-    color: #666;
-    transition: transform 0.3s ease;
-}
-
-.accordion-content {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.accordion-item.active {
-    background: var(--primary-color);
-}
-
-.accordion-item.active .accordion-button {
-    color: white;
-}
-
-.accordion-item.active .feature-icon {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.accordion-item.active .feature-icon i {
-    color: white;
-}
-
-.accordion-item.active .feature-text {
-    color: white;
-}
-
-.accordion-item.active .expand-icon {
-    transform: rotate(45deg);
-    color: white;
-}
-
-.accordion-item.active .accordion-content {
-    padding: 0 1.2rem 1.2rem;
-    max-height: 200px;
-    color: white;
-}
-
-/* Notice Alert Styles */
-.notice-alert {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    margin-top: 1rem;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-}
-
-.notice-alert i {
-    font-size: 1.2rem;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-/* Mobile Responsive */
+/* Mobile responsive */
 @media (max-width: 1024px) {
     .features-section {
         padding: 2.5rem;
@@ -1129,6 +1008,10 @@ main {
         margin: 1rem;
         padding: 1.5rem;
         gap: 2rem;
+    }
+
+    .features-left {
+        padding-right: 0;
     }
 
     .features-left h2 {
@@ -1157,11 +1040,6 @@ main {
     .accordion-content {
         font-size: 0.9rem;
     }
-
-    .features-image {
-        aspect-ratio: 16/10; /* Slightly taller on mobile */
-        margin-top: 1.5rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1171,5 +1049,150 @@ main {
 
     .features-left h2 {
         font-size: 1.8rem;
+    }
+}
+
+/* Updated Accordion Styles */
+.features-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    background: #fff;
+    border-radius: 16px;
+    padding: 0.5rem;
+}
+
+.accordion-item {
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #edf2f7;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    min-width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #edf2f7;
+    border-radius: 10px;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.feature-text {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.expand-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #a0aec0;
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+/* Active state styles */
+.accordion-item.active {
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-item.active .accordion-button {
+    background: var(--primary-color);
+}
+
+.accordion-item.active .feature-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.accordion-item.active .feature-text {
+    color: white;
+}
+
+.accordion-item.active .expand-icon {
+    transform: rotate(45deg);
+    color: white;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 1rem 1.2rem;
+    max-height: 200px;
+    border-top: 1px solid #edf2f7;
+}
+
+/* Notice alert styles */
+.notice-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.notice-alert i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 2px;
+    animation: pulse 2s infinite;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .accordion-button {
+        padding: 0.8rem 1rem;
+    }
+
+    .feature-icon {
+        min-width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .feature-text {
+        font-size: 0.9rem;
+    }
+
+    .accordion-item.active .accordion-content {
+        padding: 0.8rem 1rem;
+    }
+
+    .notice-alert {
+        font-size: 0.85rem;
     }
 }
