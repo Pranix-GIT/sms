@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choi Vui Hoc Tot</title>
+    <title>Play & Learn</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,25 +11,42 @@
     <header>
         <nav class="main-nav">
             <div class="nav-left">
-                <a href="#" class="nav-link">TRANG CHỦ</a>
-                <a href="#" class="nav-link">THƯ VIỆN</a>
+                <div class="logo">
+                    <img src="assets/logo.png" alt="Play & Learn Logo">
+                </div>
+                <div class="nav-links desktop-menu">
+                    <a href="#" class="nav-link">HOME</a>
+                    <a href="#" class="nav-link">GALLERY</a>
+                </div>
             </div>
             <div class="nav-right">
-                <button class="search-btn">
-                    <img src="assets/search-icon.svg" alt="Search">
-                    QUỲ BÀI VIẾT
+                <button class="admission-btn desktop-menu">ADMISSION</button>
+                <button class="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <button class="admission-btn mobile-admission">ADMISSION</button>
+            <div class="menu-divider"></div>
+            <nav class="mobile-nav">
+                <a href="#" class="nav-link">HOME</a>
+                <a href="#" class="nav-link">GALLERY</a>
+            </nav>
+        </div>
     </header>
 
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>CHƠI VUI<br>HỌC TỐT</h1>
-                <p>Môi trường vui chơi mới mẻ, nơi những ý tưởng sáng tạo và thực tiễn, các hoạt động "học mà chơi, chơi mà học" đồng hành cùng trẻ trong hành trình phát triển và khám phá.</p>
+                <h1>PLAY FUN<br>LEARN WELL</h1>
+                <p>A fresh playground environment where creative and practical ideas, "learning through play" activities accompany children on their journey of development and discovery.</p>
                 <button class="cta-button">
-                    TÌM HIỂU THÊM
+                    LEARN MORE
                     <span class="arrow">→</span>
                 </button>
             </div>
