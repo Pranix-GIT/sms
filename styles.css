@@ -163,17 +163,96 @@ header {
     line-height: 1.6;
 }
 
+/* Update CTA button styles */
 .cta-button {
     background: var(--secondary-color);
     border: none;
-    padding: 1rem 2rem;
+    padding: 0.9rem 2rem 0.9rem 2rem;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 1.8rem;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    width: fit-content;
+    margin: 0 auto; /* Center the button */
+}
+
+/* Play icon styles - adjusted for smaller button */
+.play-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    animation: blink 2s infinite;
+    position: relative;
+    margin-left: auto;
+}
+
+.play-icon::after {
+    content: '';
+    position: absolute;
+    width: 40px;  /* Outer circle size */
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    animation: blinkRing 2s infinite;
+}
+
+.play-icon i {
+    font-size: 16px;  /* Increased from 12px */
+    color: #333;
+}
+
+/* Updated blinking animations */
+@keyframes blink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes blinkRing {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hover effect */
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover .play-icon {
+    animation: none;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 /* Orbit System */
@@ -458,74 +537,75 @@ header {
         padding: 1.5rem;
         grid-template-columns: 1fr;
         position: relative;
+        padding-top: 3rem; /* Added more top padding */
     }
 
     .hero-content {
         text-align: center;
-        padding-bottom: 300px;
+        padding-bottom: 320px;
+        padding-top: 1.5rem; /* Added top padding */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero-content h1 {
         font-size: 2rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem; /* Added top margin */
     }
 
     .hero-content p {
         font-size: 0.9rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.5rem; /* Increased bottom margin */
         padding: 0 0.8rem;
     }
 
     .cta-button {
-        margin: 0 auto;
-        padding: 0.8rem 1.5rem;
+        margin-top: 0.5rem; /* Added top margin to button */
     }
 
-    /* Adjust astro container position - move lower and make bigger */
+    .play-icon {
+        width: 26px;
+        height: 26px;
+    }
+
     .astro-container {
-        width: 300px;  /* Increased from 280px */
+        width: 300px;
         height: 300px;
-        bottom: -10px; /* Decreased from 10px to move lower */
+        bottom: -10px;
         top: auto;
         transform: translateX(-50%);
     }
 
-    /* Adjust orbit system position to match */
     .orbit-system {
         position: absolute;
         top: auto;
-        bottom: 20%; /* Decreased from 25% to move lower */
+        bottom: 20%;
         right: 50%;
         transform: translate(50%, 50%);
-        width: 340px; /* Increased from 320px */
+        width: 340px;
         height: 340px;
     }
 
-    /* Adjust content spacing */
-    .hero-content {
-        text-align: center;
-        padding-bottom: 320px; /* Increased from 300px */
-    }
-
-    /* Adjust orbit sizes proportionally */
     .orbit-1 { 
-        width: 140px; /* Increased from 130px */
+        width: 140px;
         height: 140px; 
     }
     .orbit-2 { 
-        width: 200px; /* Increased from 190px */
+        width: 200px;
         height: 200px; 
     }
     .orbit-3 { 
-        width: 270px; /* Increased from 250px */
+        width: 270px;
         height: 270px; 
     }
     .orbit-4 { 
-        width: 340px; /* Increased from 320px */
+        width: 340px;
         height: 340px; 
     }
 
-    /* Scale up orbit icons */
     .orbit-icon {
         width: 40px;
         height: 40px;
@@ -535,7 +615,6 @@ header {
         font-size: 18px;
     }
 
-    /* Update orbit animations for new sizes */
     @keyframes orbit1 {
         from { transform: translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg); }
         to { transform: translate(-50%, -50%) rotate(360deg) translateX(70px) rotate(-360deg); }
@@ -582,7 +661,7 @@ header {
 
 /* Add this to maintain layout with fixed header */
 main {
-    margin-top: 100px; /* Increased from 80px to 100px */
+    margin-top: 100px;
     position: relative;
 }
 
