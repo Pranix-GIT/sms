@@ -136,7 +136,7 @@ header {
     margin: 4rem 4rem 2rem;
     background: linear-gradient(135deg, var(--primary-color), #3D8873);
     border-radius: 24px;
-    min-height: 600px;
+    min-height: 500px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
@@ -453,25 +453,27 @@ header {
     }
 
     .hero {
-        margin: 2rem;
-        padding: 2rem;
+        min-height: 400px;
+        margin: 1.5rem;
+        padding: 1.5rem;
         grid-template-columns: 1fr;
-        min-height: 700px;
+        position: relative;
     }
 
     .hero-content {
         text-align: center;
-        padding-bottom: 450px;
+        padding-bottom: 300px;
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
     }
 
     .hero-content p {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.2rem;
+        padding: 0 0.8rem;
     }
 
     .cta-button {
@@ -479,66 +481,79 @@ header {
         padding: 0.8rem 1.5rem;
     }
 
-    /* Reposition orbit system for mobile */
-    .orbit-system {
-        bottom: -180px;
+    /* Adjust astro container position - move lower and make bigger */
+    .astro-container {
+        width: 300px;  /* Increased from 280px */
+        height: 300px;
+        bottom: -10px; /* Decreased from 10px to move lower */
+        top: auto;
+        transform: translateX(-50%);
     }
 
-    /* Scale down orbits for mobile */
+    /* Adjust orbit system position to match */
+    .orbit-system {
+        position: absolute;
+        top: auto;
+        bottom: 20%; /* Decreased from 25% to move lower */
+        right: 50%;
+        transform: translate(50%, 50%);
+        width: 340px; /* Increased from 320px */
+        height: 340px;
+    }
+
+    /* Adjust content spacing */
+    .hero-content {
+        text-align: center;
+        padding-bottom: 320px; /* Increased from 300px */
+    }
+
+    /* Adjust orbit sizes proportionally */
     .orbit-1 { 
-        width: 120px; 
-        height: 120px; 
+        width: 140px; /* Increased from 130px */
+        height: 140px; 
     }
     .orbit-2 { 
-        width: 180px; 
-        height: 180px; 
+        width: 200px; /* Increased from 190px */
+        height: 200px; 
     }
     .orbit-3 { 
-        width: 240px; 
-        height: 240px; 
+        width: 270px; /* Increased from 250px */
+        height: 270px; 
     }
     .orbit-4 { 
-        width: 300px; 
-        height: 300px; 
+        width: 340px; /* Increased from 320px */
+        height: 340px; 
     }
 
-    /* Update orbit animations for mobile */
-    @keyframes orbit1 {
-        from { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); }
-        to { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); }
-    }
-
-    @keyframes orbit2 {
-        from { transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg); }
-        to { transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg); }
-    }
-
-    @keyframes orbit3 {
-        from { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); }
-        to { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); }
-    }
-
-    @keyframes orbit4 {
-        from { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
-        to { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); }
-    }
-
-    /* Scale down orbit icons for mobile */
+    /* Scale up orbit icons */
     .orbit-icon {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
 
     .orbit-icon i {
-        font-size: 16px;
+        font-size: 18px;
     }
 
-    .astro-container {
-        width: 280px;
-        height: 280px;
-        bottom: 50px;
-        top: auto;
-        transform: translateX(-50%);
+    /* Update orbit animations for new sizes */
+    @keyframes orbit1 {
+        from { transform: translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg) translateX(70px) rotate(-360deg); }
+    }
+
+    @keyframes orbit2 {
+        from { transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); }
+    }
+
+    @keyframes orbit3 {
+        from { transform: translate(-50%, -50%) rotate(0deg) translateX(135px) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg) translateX(135px) rotate(-360deg); }
+    }
+
+    @keyframes orbit4 {
+        from { transform: translate(-50%, -50%) rotate(0deg) translateX(170px) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg) translateX(170px) rotate(-360deg); }
     }
 }
 
@@ -574,12 +589,12 @@ main {
 /* Add styles for the astro image */
 .astro-container {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    width: 600px;  /* Increased from 450px */
-    height: 700px; /* Increased from 300px */
+    width: 600px;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -609,14 +624,14 @@ main {
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
     .astro-container {
-        width: 320px;  /* Increased from 280px */
-        height: 320px;
-        bottom: 50px;
+        width: 280px;
+        height: 280px;
+        bottom: 10px;
         top: auto;
         transform: translateX(-50%);
     }
 
     .hero-content {
-        padding-bottom: 500px; /* Increased from 450px to accommodate larger image */
+        padding-bottom: 300px;
     }
 }
