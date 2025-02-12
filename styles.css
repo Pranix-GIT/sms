@@ -938,11 +938,11 @@ main {
 
 /* Features Section Styles */
 .features-section {
-    padding: 2.5rem;
-    margin: 2rem 4rem; /* Match hero section margin */
+    padding: 4rem;
+    margin: 2rem 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 4rem;
     background: white;
     border-radius: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -956,19 +956,26 @@ main {
     }
 }
 
-/* Adjust left content */
+/* Update Features Section text alignment */
 .features-left {
     padding-right: 1.5rem;
+    max-width: 600px; /* Match hero content max-width */
 }
 
 .features-left h2 {
-    font-size: 2.2rem; /* Slightly smaller */
+    font-size: 3rem; /* Smaller than hero's 4rem */
     margin-bottom: 1rem;
+    line-height: 1.1;
+    color: var(--text-color);
+    font-weight: 700;
 }
 
 .features-description {
-    font-size: 1rem; /* Slightly smaller */
+    font-size: 1.1rem; /* Same as hero description */
     margin-bottom: 1.5rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    color: #666;
 }
 
 .features-image {
@@ -1006,27 +1013,54 @@ main {
 
 @media (max-width: 768px) {
     .features-section {
-        margin: 1.5rem; /* Match hero section mobile margin */
-        padding: 1.5rem;
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        padding: 2rem 1.5rem;
+        margin: 1.5rem;
+        gap: 2rem;
     }
 
     .features-left {
         padding-right: 0;
+        max-width: 100%;
+        text-align: center;
+        padding-top: 1rem;
     }
 
     .features-left h2 {
-        font-size: 2rem;
+        font-size: 2.4rem; /* Smaller than hero's mobile size */
         text-align: center;
+        margin-bottom: 1rem;
+        color: #333;
+        font-weight: 700;
     }
 
     .features-description {
         text-align: center;
-        margin-bottom: 0; /* Remove bottom margin since image will be hidden */
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+        font-size: 1.1rem; /* Keep same as hero description */
+        line-height: 1.6;
+        color: #666;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0.8;
     }
 
     .features-image {
-        display: none; /* Hide image on mobile */
+        display: none;
+    }
+
+    /* Adjust accordion for mobile */
+    .features-accordion {
+        gap: 0.8rem;
+        padding: 0;
+        background: transparent;
+    }
+
+    .accordion-item {
+        border: 1px solid #edf2f7;
+        margin-bottom: 0.5rem;
     }
 
     .accordion-button {
@@ -1034,8 +1068,8 @@ main {
     }
 
     .feature-icon {
-        min-width: 40px;
-        height: 40px;
+        min-width: 36px;
+        height: 36px;
         font-size: 1rem;
     }
 
@@ -1046,15 +1080,29 @@ main {
     .accordion-content {
         font-size: 0.9rem;
     }
+
+    .accordion-item.active .accordion-content {
+        padding: 1rem;
+    }
+
+    .notice-alert {
+        margin-top: 0.6rem;
+        padding: 0.8rem;
+    }
 }
 
 @media (max-width: 480px) {
     .features-section {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .features-left h2 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
+    }
+
+    .features-description {
+        font-size: 1rem;
+        padding: 0 1.5rem;
     }
 }
 
@@ -1200,5 +1248,76 @@ main {
 
     .notice-alert {
         font-size: 0.85rem;
+    }
+}
+
+/* Page header styles */
+.page-header {
+    margin: 6rem 4rem 2rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--primary-color), #3D8873);
+    border-radius: 24px;
+    text-align: center;
+    color: white;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .page-header {
+        margin: 4rem 1.5rem 1.5rem;
+        padding: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Add back button styles */
+.back-button {
+    position: fixed;
+    top: 100px; /* Below the header */
+    left: 4rem;
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-button i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.back-button:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .back-button {
+        top: 85px;
+        left: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
+
+    .back-button i {
+        font-size: 1rem;
     }
 }

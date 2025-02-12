@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission - Shiv Shakti Bal Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="32x32">
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="Play & Learn Logo">
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links desktop-menu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="gallery.html" class="nav-link">GALLERY</a>
+                    <a href="about.html" class="nav-link">ABOUT US</a>
+                </div>
+                <button class="admission-btn desktop-menu" onclick="window.location.href='admission.html'">ADMISSION</button>
+                <button class="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay"></div>
+        <div class="mobile-menu">
+            <button class="admission-btn mobile-admission" onclick="window.location.href='admission.html'">ADMISSION</button>
+            <div class="menu-divider"></div>
+            <nav class="mobile-nav">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="gallery.html" class="nav-link">GALLERY</a>
+                <a href="about.html" class="nav-link">ABOUT US</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Back button -->
+    <button class="back-button" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <main>
+        <section class="page-header">
+            <h1>Admission</h1>
+        </section>
+        <!-- Admission content will go here -->
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 
