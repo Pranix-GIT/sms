@@ -207,4 +207,149 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Thank you for subscribing! You will receive updates from SSBA.');
         this.reset();
     });
+
+    // Chat Widget functionality
+    const chatButton = document.getElementById('chatButton');
+    const chatPopup = document.getElementById('chatPopup');
+    const closeChat = document.getElementById('closeChat');
+    const sendMessage = document.getElementById('sendMessage');
+    const userInput = document.getElementById('userInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    // Initial bot message
+    addMessage("Hi! 👋 I'm SSBA's AI assistant. How can I help you today?", 'bot');
+
+    // Toggle chat popup
+    chatButton.addEventListener('click', () => {
+        chatPopup.classList.toggle('active');
+        // Remove notification dot when chat is opened
+        chatButton.querySelector('.notification-dot').style.display = 'none';
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatPopup.classList.remove('active');
+    });
+
+    // Send message function
+    async function sendMessageToBot() {
+        const message = userInput.value.trim();
+        if (!message) return;
+
+        // Add user message to chat
+        addMessage(message, 'user');
+        userInput.value = '';
+
+        // Show typing indicator
+        const typingIndicator = addMessage('Typing...', 'bot');
+
+        try {
+            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer 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",
+                    "HTTP-Referer": "https://shivshaktibalacademy.edu.np",
+                    "X-Title": "SSBA Assistant",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    model: "deepseek/deepseek-r1:free",
+                    messages: [
+                        {
+                            role: "system",
+                            content: `You are SSBA's AI assistant. Your primary role is to assist with school-related inquiries only.
+
+KEY INFORMATION TO SHARE:
+1. Academic Programs:
+   - Classes: Playgroup to Grade 5
+   - Age groups: 2-11 years
+   - Curriculum: Modern teaching with practical approach
+
+2. Facilities:
+   - Transportation: Available from Lahan to Mirchaiya
+   - Hostel: 24/7 supervised accommodation
+   - Labs & Equipment: Modern learning facilities
+   - Sports & Recreation: Multiple activities
+
+3. Faculty:
+   - Qualified teachers with B.Ed certification
+   - Regular training and development
+   - Weekly parent-teacher meetings
+
+4. Extra-curricular:
+   - Sports activities
+   - Cultural programs
+   - Art and craft
+   - Science projects
+
+INTERACTION GUIDELINES:
+- Keep responses focused on school-related topics
+- If asked about non-school topics, politely redirect to school-related matters
+- For fee structure or specific admission details, direct them to:
+  Phone: +977 984-2000000
+  Email: info@ssba.edu.np
+- Be friendly but professional
+- Encourage campus visits and admission inquiries
+- Use simple, clear language
+- Keep responses concise and relevant
+
+If you receive questions unrelated to the school, respond with:
+"I'm focused on helping you with information about Shiv Shakti Bal Academy. Could you please ask me about our academic programs, facilities, or admission process?"`
+                        },
+                        {
+                            role: "user",
+                            content: message
+                        }
+                    ]
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('API Error:', errorData);
+                throw new Error(`API request failed: ${errorData.error?.message || 'Unknown error'}`);
+            }
+
+            const data = await response.json();
+            typingIndicator.remove();
+
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                const botResponse = data.choices[0].message.content;
+                addMessage(botResponse, 'bot');
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            typingIndicator.remove();
+            addMessage("I apologize for the technical difficulty. Please contact our admission office:\nPhone: +977 984-2000000\nEmail: info@ssba.edu.np", 'bot');
+        }
+    }
+
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${sender}-message`);
+        messageDiv.textContent = text;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return messageDiv;
+    }
+
+    // Send message on button click
+    sendMessage.addEventListener('click', sendMessageToBot);
+
+    // Send message on Enter key (Shift+Enter for new line)
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessageToBot();
+        }
+    });
+
+    // Auto-resize textarea
+    userInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
 }); 

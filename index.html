@@ -31,6 +31,43 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <!-- Add this right after opening body tag -->
+    <div class="chat-widget">
+        <button class="chat-widget-button" id="chatButton">
+            <i class="fas fa-comment-dots"></i>
+            <span class="notification-dot"></span>
+        </button>
+        
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <img src="assets/logo.png" alt="SSBA Chat" class="chat-logo">
+                    <div>
+                        <h3>SSBA Assistant</h3>
+                        <span>Typically replies instantly</span>
+                    </div>
+                </div>
+                <button class="close-chat" id="closeChat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            
+            <div class="chat-input">
+                <textarea 
+                    id="userInput" 
+                    placeholder="Type your message..."
+                    rows="1"
+                ></textarea>
+                <button id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     <header>
         <nav class="main-nav">
             <div class="nav-left">
