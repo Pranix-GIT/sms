@@ -1558,7 +1558,7 @@ main {
     }
 
     .signature-image {
-        height: 50px;
+    height: 50px;
     }
 }
 
@@ -1868,5 +1868,402 @@ main {
     .info-card .admission-btn {
         padding: 0.7rem 1.2rem;
         font-size: 0.8rem;
+    }
+}
+
+/* Reviews Section Styles */
+.reviews-section {
+    padding: 2.5rem;
+    margin: 2rem 4rem;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 650px; /* Decreased height */
+}
+
+/* Ratings Overview */
+.ratings-overview {
+    padding-right: 2rem;
+    border-right: 1px solid #edf2f7;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.overall-rating {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.rating-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stars {
+    color: #FFD700;
+    font-size: 1.4rem;
+    margin: 0.8rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.stars i {
+    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.2));
+}
+
+.total-reviews {
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Reviews Slider */
+.reviews-slider {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviews-track {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+    max-height: calc(100% - 50px); /* Adjusted for smaller height */
+}
+
+/* Review Cards */
+.review-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #edf2f7;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.reviewer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.review-stars {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 0.2rem;
+}
+
+.review-stars i {
+    font-size: 1rem;
+    filter: drop-shadow(0 1px 2px rgba(255, 215, 0, 0.15));
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Custom Scrollbar */
+.reviews-track::-webkit-scrollbar {
+    width: 6px;
+}
+
+.reviews-track::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.reviews-track::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* View More Button */
+.view-more-reviews {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid #edf2f7;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.view-more-reviews:hover {
+    background: #f8f9fa;
+    color: var(--primary-color-dark);
+}
+
+/* Map Section */
+.school-location {
+    margin-top: 1rem; /* Reduced from auto */
+    padding-top: 1rem; /* Reduced from 1.5rem */
+    border-top: 1px solid #edf2f7;
+    margin-right: 2rem;
+}
+
+.school-location h3,
+.map-container {
+    display: none; /* Hide map and heading by default on desktop */
+}
+
+.directions-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0; /* Reduced padding */
+}
+
+.directions-link:hover {
+    color: var(--primary-color-dark);
+    text-decoration: underline;
+}
+
+/* Show map and heading only on mobile */
+@media (max-width: 992px) {
+    .school-location h3,
+    .map-container {
+        display: block;
+    }
+
+    .school-location {
+        order: 4;
+        margin-right: 0;
+        padding-top: 2rem;
+        margin-top: 2rem;
+    }
+
+    .map-container {
+        height: 200px;
+        margin-bottom: 0.8rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .directions-link {
+        padding: 0.5rem;
+        justify-content: center;
+        margin-top: 0.5rem; /* Added space after map */
+    }
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 180px;
+    }
+
+    .directions-link {
+        font-size: 0.85rem;
+    }
+}
+
+/* Rating Categories with Stars */
+.rating-categories {
+    margin-top: 2rem;
+}
+
+.rating-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.category {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 0.2rem;
+    color: #FFD700;
+}
+
+.rating-stars i {
+    font-size: 0.9rem;
+    filter: drop-shadow(0 1px 2px rgba(255, 215, 0, 0.15));
+}
+
+.rating-bar {
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 992px) {
+    .reviews-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .ratings-overview {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid #edf2f7;
+        padding-bottom: 2rem;
+    }
+
+    .school-location {
+        order: 3; /* Move map to bottom */
+        margin-top: 2rem;
+        border-top: 1px solid #edf2f7;
+        padding-top: 2rem;
+    }
+
+    .reviews-slider {
+        order: 2;
+        height: 700px; /* Increased height for mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    .rating-item {
+        margin-bottom: 1.2rem;
+    }
+
+    .category {
+        font-size: 0.9rem;
+    }
+
+    .rating-stars i {
+        font-size: 0.85rem;
+    }
+
+    .rating-bar {
+        height: 6px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .reviews-section {
+        padding: 2rem;
+        margin: 2rem;
+    }
+
+    .reviews-container {
+        height: 600px;
+    }
+}
+
+@media (max-width: 992px) {
+    .reviews-container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .reviews-slider {
+        height: 550px; /* Decreased height for tablet */
+    }
+
+    .reviews-track {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-section {
+        padding: 1.5rem;
+        margin: 1.5rem;
+    }
+
+    .reviews-slider {
+        height: 500px; /* Decreased height for mobile */
+    }
+
+    .reviews-track {
+        grid-template-columns: 1fr; /* Single column for mobile */
+        gap: 0.8rem;
+    }
+
+    .review-card {
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-section {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .reviews-slider {
+        height: 450px; /* Further decreased for small mobile */
+    }
+
+    .review-card {
+        padding: 1rem;
     }
 } 
