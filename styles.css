@@ -3578,3 +3578,59 @@ main {
     justify-content: center;
     gap: 8px;
 }
+
+/* Document preview styles */
+.doc-preview {
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.doc-preview.active {
+    display: block;
+}
+
+.doc-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* PDF preview styling */
+.pdf-preview {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.pdf-preview i {
+    font-size: 2rem;
+    color: #dc2626;
+}
+
+.pdf-preview span {
+    font-size: 0.9rem;
+    color: #475569;
+    word-break: break-all;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .pdf-preview {
+        padding: 0.75rem;
+    }
+    
+    .pdf-preview i {
+        font-size: 1.5rem;
+    }
+    
+    .pdf-preview span {
+        font-size: 0.8rem;
+    }
+}

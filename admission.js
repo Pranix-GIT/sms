@@ -89,26 +89,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 label.style.background = '#55B79D';
                 label.style.color = 'white';
                 
-                // If it's a photo, show preview
-                if (this.id === 'studentPhoto' && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    
-                    // Create preview element if it doesn't exist
-                    let preview = docItem.querySelector('.doc-preview');
-                    if (!preview) {
-                        preview = document.createElement('div');
-                        preview.className = 'doc-preview';
-                        preview.innerHTML = '<img src="" alt="Document preview">';
-                        docItem.insertBefore(preview, docItem.firstChild);
-                    }
+                // Create preview element if it doesn't exist
+                let preview = docItem.querySelector('.doc-preview');
+                if (!preview) {
+                    preview = document.createElement('div');
+                    preview.className = 'doc-preview';
+                    docItem.insertBefore(preview, docItem.firstChild);
+                }
 
+                // Handle different file types
+                if (file.type.startsWith('image/')) {
+                    // For images
+                    preview.innerHTML = '<img src="" alt="Document preview">';
+                    const reader = new FileReader();
                     reader.onload = function(e) {
                         preview.querySelector('img').src = e.target.result;
                         preview.classList.add('active');
                         docItem.classList.add('has-preview');
                     };
-
                     reader.readAsDataURL(file);
+                } else if (file.type === 'application/pdf') {
+                    // For PDFs
+                    preview.innerHTML = `
+                        <div class="pdf-preview">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>${file.name}</span>
+                        </div>
+                    `;
+                    preview.classList.add('active');
+                    docItem.classList.add('has-preview');
                 }
             }
         });
@@ -118,23 +127,30 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (validateStep(currentStep)) {
-            const formData = new FormData(form);
             const submitBtn = form.querySelector('.submit-btn');
-            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
             try {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+                // Create FormData object
+                const formData = new FormData(form);
                 
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
+                // Add file data
+                fileInputs.forEach(input => {
+                    if (input.files[0]) {
+                        formData.append(input.name, input.files[0]);
                     }
                 });
-                
+
+                // Submit the form
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
                 if (response.ok) {
                     alert('Application submitted successfully!');
+                    
                     // Reset form and file inputs
                     form.reset();
                     fileInputs.forEach(input => {
@@ -152,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             preview.remove();
                         }
                     });
-                    
+
                     // Reset to first step
                     currentStep = 1;
                     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
@@ -160,10 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
                     document.querySelector('.progress-step[data-step="1"]').classList.add('active');
                     updateProgress(1);
-                    
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1500);
+
+                    // Redirect to admission page
+                    window.location.href = 'admission.html';
                 } else {
                     throw new Error('Form submission failed');
                 }

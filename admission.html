@@ -66,16 +66,14 @@
             </div>
         </div>
 
-        <form id="admissionForm" class="admission-form" action="https://formsubmit.co/31020c781177623f73cd73e569ca367b" method="POST">
-            <!-- Update hidden fields for Vercel deployment -->
+        <form id="admissionForm" class="admission-form" action="https://formsubmit.co/31020c781177623f73cd73e569ca367b" method="POST" enctype="multipart/form-data">
+            <!-- Update hidden fields -->
             <input type="hidden" name="_subject" value="New Admission Application">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
-            <!-- Update _next to your Vercel URL -->
-            <input type="hidden" name="_next" value="https://your-vercel-domain.vercel.app/admission.html">
+            <!-- Update redirect URL -->
+            <input type="hidden" name="_next" value="admission.html">
             <input type="hidden" name="_autoresponse" value="Thank you for submitting your admission application to Shiv Shakti Bal Academy. We have received your application and will contact you soon.">
-            <!-- Update _url to your Vercel domain -->
-            <input type="hidden" name="_url" value="https://your-vercel-domain.vercel.app/admission.html">
 
             <!-- Step 1: Student Details -->
             <div class="form-step active" data-step="1">
