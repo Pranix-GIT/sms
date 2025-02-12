@@ -75,50 +75,76 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
-    // Handle form submission
+    // Update form submission handler
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (validateStep(currentStep)) {
-            const formData = new FormData(form);
             const submitBtn = form.querySelector('.submit-btn');
             
             try {
-                // Disable submit button and show loading state
+                // Show quick loading state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                 
+                // Add file validation
+                const studentPhoto = document.getElementById('studentPhoto').files[0];
+                const birthCert = document.getElementById('birthCert').files[0];
+                
+                // Validate required files
+                if (!studentPhoto) {
+                    throw new Error('Please upload student photo');
+                }
+                if (!birthCert) {
+                    throw new Error('Please upload birth certificate');
+                }
+                
+                // Create FormData and submit
+                const formData = new FormData(form);
+                
+                // Submit the form using fetch
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    body: formData
                 });
                 
                 if (response.ok) {
-                    alert('Application submitted successfully!');
-                    // Reset form
+                    alert('Your form has been submitted. We will contact you back soon.');
                     form.reset();
                     // Reset to first step
                     currentStep = 1;
-                    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                    document.querySelectorAll('.form-step').forEach(step => {
+                        step.classList.remove('active');
+                    });
                     document.querySelector('.form-step[data-step="1"]').classList.add('active');
-                    document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
+                    
+                    // Reset progress
+                    document.querySelectorAll('.progress-step').forEach(step => {
+                        step.classList.remove('active', 'completed');
+                    });
                     document.querySelector('.progress-step[data-step="1"]').classList.add('active');
                     updateProgress(1);
                     
-                    // Reload page after short delay
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1500);
+                    // Reset file upload labels
+                    document.querySelectorAll('.doc-upload label').forEach(label => {
+                        label.innerHTML = '<i class="fas fa-upload"></i> Upload';
+                        label.classList.remove('file-selected');
+                    });
+                    
+                    // Remove previews
+                    document.querySelectorAll('.doc-preview').forEach(preview => {
+                        preview.remove();
+                    });
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
                     throw new Error('Form submission failed');
                 }
+                
             } catch (error) {
-                alert('There was an error submitting your application. Please try again.');
+                alert(error.message || 'There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
             } finally {
-                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit Application';
             }
@@ -182,4 +208,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize progress bar
     updateProgress(1);
+
+    // Add file preview for all document uploads
+    document.querySelectorAll('input[type="file"]').forEach(input => {
+        input.addEventListener('change', function(e) {
+            const file = this.files[0];
+            if (file) {
+                // Update label to show file name
+                const label = this.nextElementSibling;
+                label.innerHTML = `<i class="fas fa-check"></i> ${file.name}`;
+                label.classList.add('file-selected');
+                
+                // Show preview for images
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    const docItem = this.closest('.document-item');
+                    
+                    let preview = docItem.querySelector('.doc-preview');
+                    if (!preview) {
+                        preview = document.createElement('div');
+                        preview.className = 'doc-preview';
+                        preview.innerHTML = '<img src="" alt="Document preview">';
+                        docItem.insertBefore(preview, docItem.firstChild);
+                    }
+
+                    reader.onload = function(e) {
+                        preview.querySelector('img').src = e.target.result;
+                        preview.classList.add('active');
+                        docItem.classList.add('has-preview');
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    });
 }); 
