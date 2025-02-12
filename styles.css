@@ -2489,7 +2489,7 @@ main {
 .footer-logo {
     height: 60px;
     margin-bottom: 1.5rem;
-    filter: brightness(0) invert(1); /* This will make the logo white */
+    filter: brightness(0) invert(1); /* This makes any logo white */
 }
 
 .school-info p {
