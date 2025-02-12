@@ -1484,6 +1484,7 @@ main {
 .signature-image {
     height: 60px;
     width: auto;
+    opacity: 0.85; /* Slightly transparent for a more natural look */
 }
 
 /* Mobile Responsive */
@@ -1613,7 +1614,7 @@ main {
     position: relative;
     border: 1px solid #edf2f7;
     overflow: hidden;
-    height: 170px; /* Slightly reduced for better fit */
+    height: 170px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1621,6 +1622,7 @@ main {
 }
 
 .class-card::before {
+    display: block; /* Show the hover gradient */
     content: '';
     position: absolute;
     top: 0;
@@ -1686,6 +1688,49 @@ main {
 .class-card:hover h3,
 .class-card:hover p {
     color: white;
+}
+
+/* Remove hover gradient since we have permanent colors */
+.class-card:nth-child(1),
+.class-card:nth-child(2),
+.class-card:nth-child(3),
+.class-card:nth-child(4),
+.class-card:nth-child(5),
+.class-card:nth-child(6),
+.class-card:nth-child(7),
+.class-card:nth-child(8),
+.class-card:nth-child(9) {
+    background: white; /* Reset all to white background */
+}
+
+/* Restore hover effect */
+.class-card::before {
+    display: block; /* Show the hover gradient */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), #3D8873);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.class-card:hover::before {
+    opacity: 1;
+}
+
+/* Remove the translateY hover effect */
+.class-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Keep info card styling */
+.info-card {
+    background: linear-gradient(135deg, var(--primary-color), #3D8873);
 }
 
 /* Info card styles */
