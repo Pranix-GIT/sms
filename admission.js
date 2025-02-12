@@ -75,6 +75,45 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
+    // Handle all document uploads
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    fileInputs.forEach(input => {
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const docItem = this.closest('.document-item');
+                const label = docItem.querySelector('label');
+                
+                // Update label text to show selected file
+                label.innerHTML = `<i class="fas fa-check"></i> ${file.name}`;
+                label.style.background = '#55B79D';
+                label.style.color = 'white';
+                
+                // If it's a photo, show preview
+                if (this.id === 'studentPhoto' && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    
+                    // Create preview element if it doesn't exist
+                    let preview = docItem.querySelector('.doc-preview');
+                    if (!preview) {
+                        preview = document.createElement('div');
+                        preview.className = 'doc-preview';
+                        preview.innerHTML = '<img src="" alt="Document preview">';
+                        docItem.insertBefore(preview, docItem.firstChild);
+                    }
+
+                    reader.onload = function(e) {
+                        preview.querySelector('img').src = e.target.result;
+                        preview.classList.add('active');
+                        docItem.classList.add('has-preview');
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    });
+
     // Handle form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -83,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = form.querySelector('.submit-btn');
             
             try {
-                // Disable submit button and show loading state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                 
@@ -97,8 +135,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (response.ok) {
                     alert('Application submitted successfully!');
-                    // Reset form
+                    // Reset form and file inputs
                     form.reset();
+                    fileInputs.forEach(input => {
+                        const docItem = input.closest('.document-item');
+                        const label = docItem.querySelector('label');
+                        const preview = docItem.querySelector('.doc-preview');
+                        
+                        // Reset label
+                        label.innerHTML = '<i class="fas fa-upload"></i> Upload';
+                        label.style.background = 'none';
+                        label.style.color = '#55B79D';
+                        
+                        // Remove preview if exists
+                        if (preview) {
+                            preview.remove();
+                        }
+                    });
+                    
                     // Reset to first step
                     currentStep = 1;
                     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
@@ -107,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.progress-step[data-step="1"]').classList.add('active');
                     updateProgress(1);
                     
-                    // Reload page after short delay
                     setTimeout(() => {
                         window.location.reload();
                     }, 1500);
@@ -118,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
             } finally {
-                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit Application';
             }
@@ -135,35 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
-    // Handle student photo preview
-    const studentPhotoInput = document.getElementById('studentPhoto');
-    if (studentPhotoInput) {
-        studentPhotoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                const docItem = this.closest('.document-item');
-                
-                // Create preview element if it doesn't exist
-                let preview = docItem.querySelector('.doc-preview');
-                if (!preview) {
-                    preview = document.createElement('div');
-                    preview.className = 'doc-preview';
-                    preview.innerHTML = '<img src="" alt="Student photo preview">';
-                    docItem.insertBefore(preview, docItem.firstChild);
-                }
-
-                reader.onload = function(e) {
-                    preview.querySelector('img').src = e.target.result;
-                    preview.classList.add('active');
-                    docItem.classList.add('has-preview');
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-    }
 
     // Update progress bar
     function updateProgress(step) {
