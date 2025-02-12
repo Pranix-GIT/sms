@@ -105,6 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let countdownTimer;
 
     function startCountdown() {
+        // Clear any existing timer before starting a new one
+        if (countdownTimer) clearInterval(countdownTimer);
+        
+        timeLeft = timerDuration; // Reset time
+        countdownDisplay.textContent = timeLeft;
+        
         countdownTimer = setInterval(() => {
             timeLeft--;
             if (countdownDisplay) {
@@ -117,19 +123,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Start the countdown
+    // Start the countdown when page loads
     startCountdown();
 
-    // Reset timer when user hovers over notice
+    // Pause timer on hover
     noticePopup.addEventListener('mouseenter', () => {
-        clearInterval(countdownTimer);
+        if (countdownTimer) clearInterval(countdownTimer);
     });
 
-    // Resume timer when user leaves notice
+    // Resume timer on mouse leave
     noticePopup.addEventListener('mouseleave', () => {
-        startCountdown();
+        if (timeLeft > 0) {
+            countdownTimer = setInterval(() => {
+                timeLeft--;
+                if (countdownDisplay) {
+                    countdownDisplay.textContent = timeLeft;
+                }
+                if (timeLeft <= 0) {
+                    clearInterval(countdownTimer);
+                    closeNotice();
+                }
+            }, 1000);
+        }
     });
 
+    // Clear timer when manually closed
     noticeClose.addEventListener('click', () => {
         clearInterval(countdownTimer);
         closeNotice();
