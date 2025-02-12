@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Notice popup functionality
     const noticePopup = document.querySelector('.notice-popup');
     const noticeClose = document.querySelector('.notice-close');
+    const countdownDisplay = document.getElementById('countdown');
 
     function closeNotice() {
         noticePopup.style.animation = 'fadeOut 0.3s ease forwards';
@@ -98,12 +99,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    noticeClose.addEventListener('click', closeNotice);
-    noticeOverlay.addEventListener('click', closeNotice);
+    // Add countdown timer functionality
+    const timerDuration = 15; // 15 seconds
+    let timeLeft = timerDuration;
+    let countdownTimer;
+
+    function startCountdown() {
+        countdownTimer = setInterval(() => {
+            timeLeft--;
+            if (countdownDisplay) {
+                countdownDisplay.textContent = timeLeft;
+            }
+            if (timeLeft <= 0) {
+                clearInterval(countdownTimer);
+                closeNotice();
+            }
+        }, 1000);
+    }
+
+    // Start the countdown
+    startCountdown();
+
+    // Reset timer when user hovers over notice
+    noticePopup.addEventListener('mouseenter', () => {
+        clearInterval(countdownTimer);
+    });
+
+    // Resume timer when user leaves notice
+    noticePopup.addEventListener('mouseleave', () => {
+        startCountdown();
+    });
+
+    noticeClose.addEventListener('click', () => {
+        clearInterval(countdownTimer);
+        closeNotice();
+    });
+
+    noticeOverlay.addEventListener('click', () => {
+        clearInterval(countdownTimer);
+        closeNotice();
+    });
 
     // Close notice with ESC key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+            clearInterval(countdownTimer);
             closeNotice();
         }
     });
