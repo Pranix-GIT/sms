@@ -2817,7 +2817,6 @@ main {
     z-index: 1000;
 }
 
-/* Update the chat button styles */
 .chat-widget-button {
     width: 60px;
     height: 60px;
@@ -2831,8 +2830,6 @@ main {
     box-shadow: 0 4px 15px rgba(85, 183, 157, 0.3);
     position: relative;
     transition: transform 0.3s ease;
-    padding: 0; /* Remove padding */
-    overflow: hidden; /* Hide overflow for perfect circle */
 }
 
 .chat-widget-button:hover {
@@ -2844,20 +2841,6 @@ main {
     font-size: 24px;
 }
 
-/* Add styles for the avatar image */
-.avatar-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-.chat-widget-button:hover .avatar-icon {
-    transform: scale(1.1);
-}
-
-/* Update notification dot position if needed */
 .notification-dot {
     position: absolute;
     top: -2px;
@@ -2868,7 +2851,6 @@ main {
     border-radius: 50%;
     border: 2px solid white;
     animation: pulse 2s infinite;
-    z-index: 2; /* Ensure dot appears above avatar */
 }
 
 @keyframes pulse {
@@ -3146,85 +3128,4 @@ main {
 @keyframes bounce {
     0%, 60%, 100% { transform: translateY(0); }
     30% { transform: translateY(-4px); }
-}
-
-/* Chat notification bubble */
-.chat-notification {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    background: white;
-    padding: 12px 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    color: #333;
-    transform: scale(0);
-    transform-origin: bottom right;
-    animation: popIn 0.5s ease forwards 1s, float 2s ease-in-out infinite 1.5s;
-    white-space: nowrap;
-}
-
-.chat-notification::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    right: 24px;
-    width: 16px;
-    height: 16px;
-    background: white;
-    transform: rotate(45deg);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.notification-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.notification-dots {
-    display: flex;
-    gap: 3px;
-}
-
-.notification-dots span {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #55B79D;
-    animation: typing 1s infinite ease-in-out;
-}
-
-.notification-dots span:nth-child(1) { animation-delay: 0.2s; }
-.notification-dots span:nth-child(2) { animation-delay: 0.4s; }
-.notification-dots span:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-@keyframes typing {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(0.7); opacity: 0.7; }
-}
-
-/* Update avatar styles */
-.avatar-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-.chat-widget-button:hover .avatar-icon {
-    transform: scale(1.1);
 }

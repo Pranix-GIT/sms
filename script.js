@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // QA Database
     const qaDatabase = {
         welcome: {
-            message: "Hello! 👋\n\nWelcome to Shiv Shakti Bal Academy. How can I help you today?",
+            message: "Hi! 👋 I'm SSBA's Assistant. How can I help you today?",
             options: [
                 "Programs & Classes",
                 "Admission Process",
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         "programs & classes": {
-            message: "Hello! 👋\n\nWe offer classes from Playgroup (PG) to Grade 5. What would you like to know more about?",
+            message: "We offer classes from Playgroup (PG) to Grade 5. What would you like to know more about?",
             options: [
                 "Age Requirements",
                 "Class Timings",
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         "age requirements": {
-            message: "Hello! 👋\n\nOur age requirements are:\n• Playgroup: 2.5-3 years\n• Nursery: 3-4 years\n• LKG: 4-5 years\n• UKG: 5-6 years\n• Grade 1-5: 6-11 years",
+            message: "Our age requirements are:\n• Playgroup: 2.5-3 years\n• Nursery: 3-4 years\n• LKG: 4-5 years\n• UKG: 5-6 years\n• Grade 1-5: 6-11 years",
             options: [
                 "Admission Process",
                 "Class Timings",
@@ -425,11 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (qaDatabase[lowercaseOption]) {
             showTypingIndicator()
                 .then(() => {
-                    // Remove "Hello" prefix from subsequent messages
-                    const message = qaDatabase[lowercaseOption].message;
-                    const cleanMessage = message.replace("Hello! 👋\n\n", "");
-                    addMessage(cleanMessage, 'bot');
-                    
+                    addMessage(qaDatabase[lowercaseOption].message, 'bot');
                     if (qaDatabase[lowercaseOption].options) {
                         const optionsDiv = createOptionButtons(qaDatabase[lowercaseOption].options);
                         chatMessages.appendChild(optionsDiv);
@@ -474,16 +470,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const lowercaseMsg = message.toLowerCase();
         let found = false;
 
+        // Check if message contains any keywords from qaDatabase
         Object.entries(qaDatabase).forEach(([key, value]) => {
             if (lowercaseMsg.includes(key) && !found) {
                 found = true;
                 showTypingIndicator()
                     .then(() => {
-                        // Remove "Hello" prefix from subsequent messages
-                        const message = value.message;
-                        const cleanMessage = message.replace("Hello! 👋\n\n", "");
-                        addMessage(cleanMessage, 'bot');
-                        
+                        addMessage(value.message, 'bot');
                         if (value.options) {
                             const optionsDiv = createOptionButtons(value.options);
                             chatMessages.appendChild(optionsDiv);
@@ -494,10 +487,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // If no matching response found, show default message
         if (!found) {
             showTypingIndicator()
                 .then(() => {
-                    // Keep "Hello" only in welcome message
                     addMessage(qaDatabase.welcome.message, 'bot');
                     const optionsDiv = createOptionButtons(qaDatabase.welcome.options);
                     chatMessages.appendChild(optionsDiv);
@@ -511,29 +504,4 @@ document.addEventListener('DOMContentLoaded', () => {
     addMessage(qaDatabase.welcome.message, 'bot');
     const initialOptions = createOptionButtons(qaDatabase.welcome.options);
     chatMessages.appendChild(initialOptions);
-
-    // Handle notification
-    const chatNotification = document.getElementById('chatNotification');
-    const hasSeenNotification = localStorage.getItem('hasSeenChatNotification');
-
-    if (!hasSeenNotification) {
-        // Show notification after 1 second
-        setTimeout(() => {
-            chatNotification.style.display = 'block';
-        }, 1000);
-
-        // Hide notification when chat is opened
-        chatButton.addEventListener('click', () => {
-            chatNotification.style.display = 'none';
-            localStorage.setItem('hasSeenChatNotification', 'true');
-        });
-
-        // Hide notification after 10 seconds
-        setTimeout(() => {
-            chatNotification.style.animation = 'fadeOut 0.5s ease forwards';
-            setTimeout(() => {
-                chatNotification.style.display = 'none';
-            }, 500);
-        }, 10000);
-    }
 }); 
