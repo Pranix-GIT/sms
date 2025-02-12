@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
                 headers: {
-                    "Authorization": "Bearer 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",
+                    "Authorization": "Bearer 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",
                     "HTTP-Referer": "https://shivshaktibalacademy.edu.np",
                     "X-Title": "SSBA Assistant",
                     "Content-Type": "application/json"
@@ -284,9 +284,9 @@ KEY INFORMATION TO SHARE:
 INTERACTION GUIDELINES:
 - Keep responses focused on school-related topics
 - If asked about non-school topics, politely redirect to school-related matters
-- For fee structure or specific admission details, direct them to:
-  Phone: +977 984-2000000
-  Email: info@ssba.edu.np
+- For fee structure or specific admission details, direct them to contact:
+  Phone: +977 9842839339
+  Email: shivshakti.balacademy@gmail.com
 - Be friendly but professional
 - Encourage campus visits and admission inquiries
 - Use simple, clear language
@@ -322,7 +322,7 @@ If you receive questions unrelated to the school, respond with:
         } catch (error) {
             console.error('Error:', error);
             typingIndicator.remove();
-            addMessage("I apologize for the technical difficulty. Please contact our admission office:\nPhone: +977 984-2000000\nEmail: info@ssba.edu.np", 'bot');
+            addMessage("I apologize for the technical difficulty. Please contact our admission office:\nPhone: +977 9842839339\nEmail: shivshakti.balacademy@gmail.com", 'bot');
         }
     }
 
