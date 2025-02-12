@@ -135,6 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Create FormData object
                 const formData = new FormData(form);
                 
+                // Set contact info from phone numbers
+                const fatherPhone = document.getElementById('fatherPhone').value;
+                const motherPhone = document.getElementById('motherPhone').value;
+                document.getElementById('contactEmail').value = `Father: ${fatherPhone}, Mother: ${motherPhone}`;
+                
                 // Add file data
                 fileInputs.forEach(input => {
                     if (input.files[0]) {
