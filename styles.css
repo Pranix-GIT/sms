@@ -1597,20 +1597,61 @@ main {
 
 .classes-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on desktop */
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
+    gap: 1.2rem;
     padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Ensure last row is evenly distributed */
+.class-card:last-child:nth-child(3n - 2) {
+    grid-column: 2; /* Center the last card if it's alone */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .classes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Reset last card positioning for 2 columns */
+    .class-card:last-child:nth-child(3n - 2) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .classes-section {
+        padding: 1.5rem;
+        margin: 1.5rem;
+    }
+
+    .classes-grid {
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    .class-card {
+        height: 160px;
+        padding: 1.2rem;
+    }
 }
 
 .class-card {
     background: white;
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem; /* Reduced padding */
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
     border: 1px solid #edf2f7;
     overflow: hidden;
+    height: 180px; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .class-card::before {
@@ -1636,34 +1677,34 @@ main {
 }
 
 .class-icon {
-    width: 60px;
-    height: 60px;
+    width: 50px; /* Slightly smaller icons */
+    height: 50px;
     background: #f8f9fa;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
+    margin-bottom: 1rem; /* Reduced margin */
     transition: all 0.3s ease;
 }
 
 .class-icon i {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--primary-color);
     transition: all 0.3s ease;
 }
 
 .class-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     transition: all 0.3s ease;
 }
 
 .class-card p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
-    margin-bottom: 0.5rem;
+    margin: 0;
     transition: all 0.3s ease;
 }
 
@@ -1681,109 +1722,60 @@ main {
     color: white;
 }
 
-/* Mobile responsive */
-@media (max-width: 1024px) {
-    .classes-section {
-        padding: 1.5rem;
-        margin: 1.5rem;
-    }
-    
-    .classes-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-    }
+/* Info card styles */
+.info-card {
+    display: none; /* Hide by default on desktop */
 }
 
 @media (max-width: 768px) {
     .classes-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on mobile */
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
-    .class-card {
-        padding: 1.5rem;
+    .info-card {
+        display: flex; /* Show on mobile */
+        background: linear-gradient(135deg, var(--primary-color), #3D8873);
+        border: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.8rem;
+        border-radius: 16px;
+        height: 100%;
     }
 
-    .class-icon {
-        width: 50px;
-        height: 50px;
+    .info-card .info-content {
+        color: white;
+        text-align: center;
+    }
+
+    .info-card p {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1rem;
         margin-bottom: 1rem;
+        line-height: 1.4;
     }
 
-    .class-icon i {
-        font-size: 1.5rem;
+    .info-card .admission-btn {
+        background: white;
+        color: var(--primary-color);
+        padding: 0.7rem 1.8rem;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-card .admission-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 }
 
 @media (max-width: 480px) {
-    .classes-section {
-        padding: 1rem;
-        margin: 1rem;
-    }
-}
-
-/* Info card styles */
-.info-card {
-    background: linear-gradient(135deg, var(--primary-color), #3D8873);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    transition: all 0.3s ease;
-}
-
-.info-card::before {
-    display: none;
-}
-
-.info-card .info-content {
-    color: white;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.info-card p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    margin-bottom: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.info-card .admission-btn {
-    background: white;
-    color: var(--primary-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Hover effects */
-.info-card:hover {
-    background: white;
-    border: 2px solid var(--primary-color);
-}
-
-.info-card:hover .info-content {
-    color: var(--primary-color);
-}
-
-.info-card:hover p {
-    color: #666;
-}
-
-.info-card:hover .admission-btn {
-    background: linear-gradient(135deg, var(--primary-color), #3D8873);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
     .info-card {
         padding: 1.5rem;
     }
@@ -1793,7 +1785,7 @@ main {
     }
 
     .info-card .admission-btn {
-        padding: 0.7rem 1.2rem;
+        padding: 0.7rem 1.5rem;
         font-size: 0.85rem;
     }
 } 
