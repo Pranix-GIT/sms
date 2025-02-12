@@ -1597,57 +1597,23 @@ main {
 
 .classes-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
+    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
     gap: 1.2rem;
     padding: 1rem;
-    max-width: 1200px;
+    max-width: 1400px; /* Increased for 5 columns */
     margin: 0 auto;
-}
-
-/* Ensure last row is evenly distributed */
-.class-card:last-child:nth-child(3n - 2) {
-    grid-column: 2; /* Center the last card if it's alone */
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .classes-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Reset last card positioning for 2 columns */
-    .class-card:last-child:nth-child(3n - 2) {
-        grid-column: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .classes-section {
-        padding: 1.5rem;
-        margin: 1.5rem;
-    }
-
-    .classes-grid {
-        gap: 1rem;
-        padding: 0.5rem;
-    }
-
-    .class-card {
-        height: 160px;
-        padding: 1.2rem;
-    }
 }
 
 .class-card {
     background: white;
     border-radius: 16px;
-    padding: 1.5rem; /* Reduced padding */
+    padding: 1.5rem;
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
     border: 1px solid #edf2f7;
     overflow: hidden;
-    height: 180px; /* Fixed height for consistency */
+    height: 170px; /* Slightly reduced for better fit */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1677,14 +1643,14 @@ main {
 }
 
 .class-icon {
-    width: 50px; /* Slightly smaller icons */
+    width: 50px;
     height: 50px;
     background: #f8f9fa;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem; /* Reduced margin */
+    margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -1724,68 +1690,138 @@ main {
 
 /* Info card styles */
 .info-card {
-    display: none; /* Hide by default on desktop */
+    display: flex;
+    background: linear-gradient(135deg, var(--primary-color), #3D8873);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 16px;
+    height: 170px; /* Match other cards */
+}
+
+.info-card .info-content {
+    color: white;
+    text-align: center;
+}
+
+.info-card p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.info-card .admission-btn {
+    background: white;
+    color: var(--primary-color);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-card .admission-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .classes-section {
+        margin: 2rem 3rem;
+    }
+
+    .classes-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .classes-section {
+        margin: 2rem;
+        padding: 1.8rem;
+    }
+
+    .classes-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .classes-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    }
+
+    .class-card, .info-card {
+        height: 160px;
+    }
 }
 
 @media (max-width: 768px) {
+    .classes-section {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+
     .classes-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+        padding: 0.5rem;
     }
 
-    .info-card {
-        display: flex; /* Show on mobile */
-        background: linear-gradient(135deg, var(--primary-color), #3D8873);
-        border: none;
-        align-items: center;
-        justify-content: center;
-        padding: 1.8rem;
-        border-radius: 16px;
-        height: 100%;
+    .class-card, .info-card {
+        height: 150px;
+        padding: 1.2rem;
     }
 
-    .info-card .info-content {
-        color: white;
-        text-align: center;
+    .class-icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 0.8rem;
     }
 
-    .info-card p {
-        color: rgba(255, 255, 255, 0.95);
+    .class-icon i {
+        font-size: 1.3rem;
+    }
+
+    .class-card h3 {
         font-size: 1rem;
-        margin-bottom: 1rem;
-        line-height: 1.4;
     }
 
-    .info-card .admission-btn {
-        background: white;
-        color: var(--primary-color);
-        padding: 0.7rem 1.8rem;
-        border-radius: 25px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .info-card .admission-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    .class-card p {
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
-    .info-card {
-        padding: 1.5rem;
+    .classes-section {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .classes-grid {
+        gap: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .class-card, .info-card {
+        height: 140px;
+        padding: 1rem;
     }
 
     .info-card p {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     .info-card .admission-btn {
-        padding: 0.7rem 1.5rem;
-        font-size: 0.85rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
     }
 } 
