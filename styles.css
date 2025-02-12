@@ -2365,16 +2365,39 @@ main {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .newsletter-form button:hover {
-    background: var(--primary-color-dark);
+    background: var(--primary-color);
     transform: translateY(-2px);
+}
+
+.newsletter-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.25); /* 25% white overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.newsletter-form button:hover::before {
+    opacity: 1;
 }
 
 .newsletter-form button i {
     font-size: 0.9rem;
     transition: transform 0.3s ease;
+    position: relative; /* Keep icon above overlay */
+}
+
+.newsletter-form button span {
+    position: relative; /* Keep text above overlay */
 }
 
 .newsletter-form button:hover i {
@@ -2576,7 +2599,7 @@ main {
     transform: translateX(5px);
 }
 
-/* Contact Info */
+/* Contact Info - Updated styles */
 .contact-info {
     list-style: none;
     padding: 0;
@@ -2596,13 +2619,47 @@ main {
 }
 
 .contact-info a {
-    color: #999;
+    color: #999;  /* Default gray color */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .contact-info a:hover {
-    color: white;
+    color: white;  /* White color on hover */
+}
+
+/* Update mobile styles for better alignment */
+@media (max-width: 768px) {
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info li {
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+        width: 200px;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info i {
+        margin-top: 0;
+        width: 20px;
+        text-align: center;
+        color: var(--primary-color);
+    }
+    
+    .contact-info span,
+    .contact-info a {
+        flex: 1;
+        color: #999;
+    }
+
+    .contact-info a:hover {
+        color: white;
+    }
 }
 
 /* Timing Info */
@@ -2732,5 +2789,22 @@ main {
 
     .footer-logo {
         height: 50px;
+    }
+}
+
+.apply-text-mobile {
+    display: none;
+}
+
+.apply-text-desktop {
+    display: inline;
+}
+
+@media screen and (max-width: 768px) {
+    .apply-text-mobile {
+        display: inline;
+    }
+    .apply-text-desktop {
+        display: none;
     }
 } 
