@@ -80,12 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (validateStep(currentStep)) {
             const submitBtn = form.querySelector('.submit-btn');
+            const overlay = document.querySelector('.submit-overlay');
+            const loadingText = overlay.querySelector('.loading-text');
             
             try {
-                // Show loading state
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-                
                 // Validate required files
                 const studentPhoto = document.getElementById('studentPhoto').files[0];
                 const birthCert = document.getElementById('birthCert').files[0];
@@ -96,50 +94,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!birthCert) {
                     throw new Error('Please upload birth certificate');
                 }
+
+                // Show loading overlay with animated text
+                overlay.classList.add('active');
                 
-                // Submit the form directly
-                form.submit();
+                // Animate different loading messages
+                const messages = [
+                    'Scanning documents',
+                    'Processing application',
+                    'Preparing submission',
+                    'Almost done'
+                ];
                 
-                // Show success message
-                alert('Your form has been submitted successfully. We will contact you soon.');
+                let messageIndex = 0;
+                loadingText.textContent = messages[0];
                 
-                // Reset form after short delay
+                const messageInterval = setInterval(() => {
+                    messageIndex = (messageIndex + 1) % messages.length;
+                    loadingText.textContent = messages[messageIndex];
+                }, 2000);
+
+                // Submit form after short delay
                 setTimeout(() => {
-                    form.reset();
-                    // Reset to first step
-                    currentStep = 1;
-                    document.querySelectorAll('.form-step').forEach(step => {
-                        step.classList.remove('active');
-                    });
-                    document.querySelector('.form-step[data-step="1"]').classList.add('active');
-                    
-                    // Reset progress
-                    document.querySelectorAll('.progress-step').forEach(step => {
-                        step.classList.remove('active', 'completed');
-                    });
-                    document.querySelector('.progress-step[data-step="1"]').classList.add('active');
-                    updateProgress(1);
-                    
-                    // Reset file upload labels
-                    document.querySelectorAll('.doc-upload label').forEach(label => {
-                        label.innerHTML = '<i class="fas fa-upload"></i> Upload';
-                        label.classList.remove('file-selected');
-                    });
-                    
-                    // Remove previews
-                    document.querySelectorAll('.doc-preview').forEach(preview => {
-                        preview.remove();
-                    });
-                    
-                    // Reset button state
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Submit Application';
-                    
-                    // Scroll to top
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 1000);
-                
+                    clearInterval(messageInterval);
+                    form.submit();
+                }, 3000);
+
             } catch (error) {
+                overlay.classList.remove('active');
                 alert(error.message || 'There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
                 submitBtn.disabled = false;
