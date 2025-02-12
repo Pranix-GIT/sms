@@ -75,55 +75,50 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
-    // Update form submission handler
+    // Handle form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (validateStep(currentStep)) {
+            const formData = new FormData(form);
             const submitBtn = form.querySelector('.submit-btn');
-            const overlay = document.querySelector('.submit-overlay');
-            const loadingText = overlay.querySelector('.loading-text');
             
             try {
-                // Validate required files
-                const studentPhoto = document.getElementById('studentPhoto').files[0];
-                const birthCert = document.getElementById('birthCert').files[0];
+                // Disable submit button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                 
-                if (!studentPhoto) {
-                    throw new Error('Please upload student photo');
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    alert('Application submitted successfully!');
+                    // Reset form
+                    form.reset();
+                    // Reset to first step
+                    currentStep = 1;
+                    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                    document.querySelector('.form-step[data-step="1"]').classList.add('active');
+                    document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
+                    document.querySelector('.progress-step[data-step="1"]').classList.add('active');
+                    updateProgress(1);
+                    
+                    // Reload page after short delay
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    throw new Error('Form submission failed');
                 }
-                if (!birthCert) {
-                    throw new Error('Please upload birth certificate');
-                }
-
-                // Show loading overlay with animated text
-                overlay.classList.add('active');
-                
-                // Animate different loading messages
-                const messages = [
-                    'Scanning documents',
-                    'Processing application',
-                    'Preparing submission',
-                    'Almost done'
-                ];
-                
-                let messageIndex = 0;
-                loadingText.textContent = messages[0];
-                
-                const messageInterval = setInterval(() => {
-                    messageIndex = (messageIndex + 1) % messages.length;
-                    loadingText.textContent = messages[messageIndex];
-                }, 2000);
-
-                // Submit form after short delay
-                setTimeout(() => {
-                    clearInterval(messageInterval);
-                    form.submit();
-                }, 3000);
-
             } catch (error) {
-                overlay.classList.remove('active');
-                alert(error.message || 'There was an error submitting your application. Please try again.');
+                alert('There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
+            } finally {
+                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit Application';
             }
@@ -187,39 +182,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize progress bar
     updateProgress(1);
-
-    // Add file preview for all document uploads
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        input.addEventListener('change', function(e) {
-            const file = this.files[0];
-            if (file) {
-                // Update label to show file name
-                const label = this.nextElementSibling;
-                label.innerHTML = `<i class="fas fa-check"></i> ${file.name}`;
-                label.classList.add('file-selected');
-                
-                // Show preview for images
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    const docItem = this.closest('.document-item');
-                    
-                    let preview = docItem.querySelector('.doc-preview');
-                    if (!preview) {
-                        preview = document.createElement('div');
-                        preview.className = 'doc-preview';
-                        preview.innerHTML = '<img src="" alt="Document preview">';
-                        docItem.insertBefore(preview, docItem.firstChild);
-                    }
-
-                    reader.onload = function(e) {
-                        preview.querySelector('img').src = e.target.result;
-                        preview.classList.add('active');
-                        docItem.classList.add('has-preview');
-                    };
-
-                    reader.readAsDataURL(file);
-                }
-            }
-        });
-    });
 }); 

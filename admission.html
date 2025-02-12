@@ -66,11 +66,16 @@
             </div>
         </div>
 
-        <form id="admissionForm" class="admission-form" action="https://formsubmit.co/31020c781177623f73cd73e569ca367b" method="POST" enctype="multipart/form-data">
+        <form id="admissionForm" class="admission-form" action="https://formsubmit.co/31020c781177623f73cd73e569ca367b" method="POST">
+            <!-- Update hidden fields for Vercel deployment -->
             <input type="hidden" name="_subject" value="New Admission Application">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_honey" value="">
+            <!-- Update _next to your Vercel URL -->
+            <input type="hidden" name="_next" value="https://your-vercel-domain.vercel.app/admission.html">
+            <input type="hidden" name="_autoresponse" value="Thank you for submitting your admission application to Shiv Shakti Bal Academy. We have received your application and will contact you soon.">
+            <!-- Update _url to your Vercel domain -->
+            <input type="hidden" name="_url" value="https://your-vercel-domain.vercel.app/admission.html">
 
             <!-- Step 1: Student Details -->
             <div class="form-step active" data-step="1">
@@ -191,7 +196,7 @@
                             </div>
                         </div>
                         <div class="doc-upload">
-                            <input type="file" id="studentPhoto" name="student_photo" accept="image/*">
+                            <input type="file" name="Student_Photo" accept="image/*">
                             <label for="studentPhoto">
                                 <i class="fas fa-upload"></i> Upload
                             </label>
@@ -207,10 +212,8 @@
                             </div>
                         </div>
                         <div class="doc-upload">
-                            <input type="file" id="birthCert" name="birth_certificate" accept="image/*,application/pdf">
-                            <label for="birthCert">
-                                <i class="fas fa-upload"></i> Upload
-                            </label>
+                            <input type="file" name="Birth_Certificate" accept="image/*,application/pdf">
+                            <label for="birthCert">Upload</label>
                         </div>
                     </div>
 
@@ -223,10 +226,8 @@
                             </div>
                         </div>
                         <div class="doc-upload">
-                            <input type="file" id="prevSchool" name="school_records" accept="image/*,application/pdf">
-                            <label for="prevSchool">
-                                <i class="fas fa-upload"></i> Upload
-                            </label>
+                            <input type="file" name="Previous_School_Records" accept="image/*,application/pdf">
+                            <label for="prevSchool">Upload</label>
                         </div>
                     </div>
                 </div>
@@ -238,14 +239,6 @@
             </div>
         </form>
     </main>
-
-    <!-- Add this loading overlay at the end of body, before scripts -->
-    <div class="submit-overlay">
-        <div class="loading-container">
-            <div class="loading-spinner"></div>
-            <div class="loading-text"></div>
-        </div>
-    </div>
 
     <script src="admission.js"></script>
 </body>
