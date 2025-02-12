@@ -82,15 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = form.querySelector('.submit-btn');
             
             try {
-                // Show quick loading state
+                // Show loading state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                 
-                // Add file validation
+                // Validate required files
                 const studentPhoto = document.getElementById('studentPhoto').files[0];
                 const birthCert = document.getElementById('birthCert').files[0];
                 
-                // Validate required files
                 if (!studentPhoto) {
                     throw new Error('Please upload student photo');
                 }
@@ -98,17 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Please upload birth certificate');
                 }
                 
-                // Create FormData and submit
-                const formData = new FormData(form);
+                // Submit the form directly
+                form.submit();
                 
-                // Submit the form using fetch
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                });
+                // Show success message
+                alert('Your form has been submitted successfully. We will contact you soon.');
                 
-                if (response.ok) {
-                    alert('Your form has been submitted. We will contact you back soon.');
+                // Reset form after short delay
+                setTimeout(() => {
                     form.reset();
                     // Reset to first step
                     currentStep = 1;
@@ -135,16 +131,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         preview.remove();
                     });
                     
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit Application';
+                    
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    throw new Error('Form submission failed');
-                }
+                }, 1000);
                 
             } catch (error) {
                 alert(error.message || 'There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
-            } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit Application';
             }
