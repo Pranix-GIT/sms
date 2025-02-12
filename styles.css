@@ -938,10 +938,8 @@ main {
 
 /* Features Section Styles */
 .features-section {
-    padding: 3rem;
-    margin: 2rem auto;
-    max-width: 1400px;
-    width: calc(100% - 4rem);
+    padding: 2.5rem;
+    margin: 2rem 4rem; /* Match hero section margin */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
@@ -950,22 +948,27 @@ main {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Update mobile styles */
+@media (max-width: 768px) {
+    .section-container {
+        margin: 1.5rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Adjust left content */
 .features-left {
-    padding-right: 2rem;
+    padding-right: 1.5rem;
 }
 
 .features-left h2 {
-    font-size: 2.5rem;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
+    font-size: 2.2rem; /* Slightly smaller */
+    margin-bottom: 1rem;
 }
 
 .features-description {
-    font-size: 1.1rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-size: 1rem; /* Slightly smaller */
+    margin-bottom: 1.5rem;
 }
 
 .features-image {
@@ -1003,11 +1006,9 @@ main {
 
 @media (max-width: 768px) {
     .features-section {
-        grid-template-columns: 1fr;
-        width: calc(100% - 2rem);
-        margin: 1rem;
+        margin: 1.5rem; /* Match hero section mobile margin */
         padding: 1.5rem;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     .features-left {
@@ -1061,7 +1062,7 @@ main {
 .features-accordion {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem; /* Reduced gap */
     background: #fff;
     border-radius: 16px;
     padding: 0.5rem;
@@ -1077,7 +1078,7 @@ main {
 
 .accordion-button {
     width: 100%;
-    padding: 1rem 1.2rem;
+    padding: 0.9rem 1.1rem; /* Slightly reduced padding */
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -1089,9 +1090,9 @@ main {
 }
 
 .feature-icon {
-    font-size: 1.2rem;
-    min-width: 42px;
-    height: 42px;
+    font-size: 1.1rem;
+    min-width: 38px; /* Slightly smaller */
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
