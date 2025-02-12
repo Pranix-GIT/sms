@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Add countdown timer functionality
-    const timerDuration = 15; // 15 seconds
+    const timerDuration = 10; // 10 seconds
     let timeLeft = timerDuration;
     let countdownTimer;
 
