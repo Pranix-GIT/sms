@@ -29,19 +29,33 @@
     <!-- OR Option 2: Font Awesome Free + Material Icons (free alternative) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <!-- Add this right after opening body tag -->
     <div class="chat-widget">
+        <!-- Add notification bubble -->
+        <div class="chat-notification" id="chatNotification">
+            <div class="notification-content">
+                <div class="notification-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                Hey! Need help? 👋
+            </div>
+        </div>
+
         <button class="chat-widget-button" id="chatButton">
-            <i class="fas fa-comment-dots"></i>
-            <span class="notification-dot"></span>
-        </button>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjEyMCIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMjggMTQ0Yy0yMiAwLTQwLTE4LTQwLTQwczE4LTQwIDQwLTQwIDQwIDE4IDQwIDQwLTE4IDQwLTQwIDQwem02MCA4YzAgMzMtMjcgNjAtNjAgNjBzLTYwLTI3LTYwLTYwdi04aDEyMHY4eiIgZmlsbD0iIzU1Yjc5ZCIvPjwvc3ZnPg==" alt="SSBA Assistant" class="avatar-icon">
+            </button>
         
         <div class="chat-popup" id="chatPopup">
             <div class="chat-header">
                 <div class="chat-title">
-                    <img src="assets/logo.png" alt="SSBA Chat" class="chat-logo">
+                    <img src="assets/avtar.png" alt="SSBA Chat" class="chat-logo">
                     <div>
                         <h3>SSBA Assistant</h3>
                         <span>Typically replies instantly</span>

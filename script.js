@@ -208,16 +208,13 @@ document.addEventListener('DOMContentLoaded', () => {
         this.reset();
     });
 
-    // Chat Widget functionality
+    // Get chat elements
     const chatButton = document.getElementById('chatButton');
     const chatPopup = document.getElementById('chatPopup');
     const closeChat = document.getElementById('closeChat');
     const sendMessage = document.getElementById('sendMessage');
     const userInput = document.getElementById('userInput');
     const chatMessages = document.getElementById('chatMessages');
-
-    // Initial bot message
-    addMessage("Hi! 👋 I'm SSBA's AI assistant. How can I help you today?", 'bot');
 
     // Toggle chat popup
     chatButton.addEventListener('click', () => {
@@ -230,126 +227,313 @@ document.addEventListener('DOMContentLoaded', () => {
         chatPopup.classList.remove('active');
     });
 
-    // Send message function
-    async function sendMessageToBot() {
-        const message = userInput.value.trim();
-        if (!message) return;
-
-        // Add user message to chat
-        addMessage(message, 'user');
-        userInput.value = '';
-
-        // Show typing indicator
-        const typingIndicator = addMessage('Typing...', 'bot');
-
-        try {
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Authorization": "Bearer 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",
-                    "HTTP-Referer": "https://shivshaktibalacademy.edu.np",
-                    "X-Title": "SSBA Assistant",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    model: "deepseek/deepseek-r1:free",
-                    messages: [
-                        {
-                            role: "system",
-                            content: `You are SSBA's AI assistant. Your primary role is to assist with school-related inquiries only.
-
-KEY INFORMATION TO SHARE:
-1. Academic Programs:
-   - Classes: Playgroup to Grade 5
-   - Age groups: 2-11 years
-   - Curriculum: Modern teaching with practical approach
-
-2. Facilities:
-   - Transportation: Available from Lahan to Mirchaiya
-   - Hostel: 24/7 supervised accommodation
-   - Labs & Equipment: Modern learning facilities
-   - Sports & Recreation: Multiple activities
-
-3. Faculty:
-   - Qualified teachers with B.Ed certification
-   - Regular training and development
-   - Weekly parent-teacher meetings
-
-4. Extra-curricular:
-   - Sports activities
-   - Cultural programs
-   - Art and craft
-   - Science projects
-
-INTERACTION GUIDELINES:
-- Keep responses focused on school-related topics
-- If asked about non-school topics, politely redirect to school-related matters
-- For fee structure or specific admission details, direct them to contact:
-  Phone: +977 9842839339
-  Email: shivshakti.balacademy@gmail.com
-- Be friendly but professional
-- Encourage campus visits and admission inquiries
-- Use simple, clear language
-- Keep responses concise and relevant
-
-If you receive questions unrelated to the school, respond with:
-"I'm focused on helping you with information about Shiv Shakti Bal Academy. Could you please ask me about our academic programs, facilities, or admission process?"`
-                        },
-                        {
-                            role: "user",
-                            content: message
-                        }
-                    ]
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error:', errorData);
-                throw new Error(`API request failed: ${errorData.error?.message || 'Unknown error'}`);
-            }
-
-            const data = await response.json();
-            typingIndicator.remove();
-
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                const botResponse = data.choices[0].message.content;
-                addMessage(botResponse, 'bot');
-            } else {
-                throw new Error('Invalid response format');
-            }
-
-        } catch (error) {
-            console.error('Error:', error);
-            typingIndicator.remove();
-            addMessage("I apologize for the technical difficulty. Please contact our admission office:\nPhone: +977 9842839339\nEmail: shivshakti.balacademy@gmail.com", 'bot');
-        }
-    }
-
     // Add message to chat
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', `${sender}-message`);
-        messageDiv.textContent = text;
+        messageDiv.innerHTML = text;
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
         return messageDiv;
     }
 
-    // Send message on button click
-    sendMessage.addEventListener('click', sendMessageToBot);
+    // QA Database
+    const qaDatabase = {
+        welcome: {
+            message: "Hello! 👋\n\nWelcome to Shiv Shakti Bal Academy. How can I help you today?",
+            options: [
+                "Programs & Classes",
+                "Admission Process",
+                "Fee Structure",
+                "School Facilities",
+                "Contact Information"
+            ]
+        },
+        "programs & classes": {
+            message: "Hello! 👋\n\nWe offer classes from Playgroup (PG) to Grade 5. What would you like to know more about?",
+            options: [
+                "Age Requirements",
+                "Class Timings",
+                "Teaching Methodology",
+                "Back to Main Menu"
+            ]
+        },
+        "age requirements": {
+            message: "Hello! 👋\n\nOur age requirements are:\n• Playgroup: 2.5-3 years\n• Nursery: 3-4 years\n• LKG: 4-5 years\n• UKG: 5-6 years\n• Grade 1-5: 6-11 years",
+            options: [
+                "Admission Process",
+                "Class Timings",
+                "Back to Main Menu"
+            ]
+        },
+        "class timings": {
+            message: "Our school hours are:\n• Sunday - Friday: 10:00 AM - 4:00 PM\n• Saturday: Closed\n\nStudents should arrive 15 minutes before classes begin.",
+            options: [
+                "Age Requirements",
+                "Teaching Methodology",
+                "Back to Main Menu"
+            ]
+        },
+        "teaching methodology": {
+            message: "We follow a modern teaching approach including:\n• Activity-Based Learning\n• Montessori Techniques\n• Practical Demonstrations\n• Regular Parent-Teacher Meetings\n• Focus on Holistic Development",
+            options: [
+                "School Facilities",
+                "Extra Activities",
+                "Back to Main Menu"
+            ]
+        },
+        "admission process": {
+            message: "For admission, you'll need:\n• Birth Certificate\n• 2 Passport Photos\n• Previous School Report Card (if applicable)\n\nWould you like to know more about:",
+            options: [
+                "Fee Structure",
+                "Required Documents",
+                "Schedule a Visit",
+                "Back to Main Menu"
+            ]
+        },
+        "required documents": {
+            message: "Required documents for admission:\n• Birth Certificate (original + copy)\n• 2 Recent Passport Photos\n• Previous School Report Card\n• Transfer Certificate (if applicable)\n• Parent's ID Proof",
+            options: [
+                "Fee Structure",
+                "Schedule a Visit",
+                "Back to Main Menu"
+            ]
+        },
+        "schedule a visit": {
+            message: "You can visit our school:\n• Weekdays: 10:00 AM - 4:00 PM\n• Contact: 9842839339 for appointment\n• Location: Chandra Ayodhyapur, Siraha\n\nWould you like our contact information?",
+            options: [
+                "Contact Information",
+                "Direction to School",
+                "Back to Main Menu"
+            ]
+        },
+        "fee structure": {
+            message: "Our fee structure is as follows:\n• Admission Fee: रु 3,500\n• Monthly Fee: रु 2,500\n• Annual Fee: रु 2,500\n• Exam Fee: रु 500\n• Academic Fee: रु 5,500",
+            options: [
+                "Transportation Fee",
+                "Payment Schedule",
+                "Scholarships",
+                "Back to Main Menu"
+            ]
+        },
+        "transportation fee": {
+            message: "Transportation fee varies based on distance:\n• Available from Lahan to Mirchaiya\n• AC and Non-AC options\n• Monthly payment system\n\nContact office for exact rates from your location.",
+            options: [
+                "Fee Structure",
+                "Contact Information",
+                "Back to Main Menu"
+            ]
+        },
+        "payment schedule": {
+            message: "Fee payment schedule:\n• Monthly Fee: By 10th of each month\n• Annual Fee: At start of session\n• Exam Fee: Before each term\n• Multiple payment options available",
+            options: [
+                "Fee Structure",
+                "Scholarships",
+                "Back to Main Menu"
+            ]
+        },
+        "scholarships": {
+            message: "We offer scholarships for:\n• Meritorious Students\n• Financially Challenged Families\n• Sports Excellence\n• Single Parent Children\n\nContact office for details.",
+            options: [
+                "Contact Information",
+                "Fee Structure",
+                "Back to Main Menu"
+            ]
+        },
+        "school facilities": {
+            message: "We offer modern facilities including:\n• Spacious Classrooms\n• Computer Labs\n• Library\n• Sports Ground\n• CCTV Surveillance\n• Cafeteria",
+            options: [
+                "Transportation",
+                "Extra Activities",
+                "Safety Measures",
+                "Back to Main Menu"
+            ]
+        },
+        "transportation": {
+            message: "Our transportation service includes:\n• Coverage: Lahan to Mirchaiya\n• Experienced drivers\n• GPS tracked vehicles\n• Separate staff supervision\n• Door-to-door pickup/drop",
+            options: [
+                "Transportation Fee",
+                "Safety Measures",
+                "Back to Main Menu"
+            ]
+        },
+        "extra activities": {
+            message: "Extra-curricular activities include:\n• Sports (Football, Badminton, Cricket)\n• Art & Craft Workshops\n• Cultural Programs\n• Music & Dance Classes\n• Educational Excursions",
+            options: [
+                "School Facilities",
+                "Teaching Methodology",
+                "Back to Main Menu"
+            ]
+        },
+        "safety measures": {
+            message: "Our safety measures include:\n• CCTV Surveillance\n• Trained Security Staff\n• Fire Safety Equipment\n• First Aid Facilities\n• Regular Safety Drills",
+            options: [
+                "School Facilities",
+                "Contact Information",
+                "Back to Main Menu"
+            ]
+        },
+        "contact information": {
+            message: "📞 Phone: 033-401099\n📱 Mobile: 9842839339 (Admission)\n📧 Email: shivshakti.balacademy@gmail.com\n📍 Location: Chandra Ayodhyapur, Siraha, Nepal",
+            options: [
+                "Schedule a Visit",
+                "Direction to School",
+                "Back to Main Menu"
+            ]
+        },
+        "direction to school": {
+            message: "Our school is located in Chandra Ayodhyapur, Siraha:\n• Near [Landmark]\n• [X] km from Lahan\n• [Y] km from Mirchaiya\n\nWould you like to schedule a visit?",
+            options: [
+                "Schedule a Visit",
+                "Contact Information",
+                "Back to Main Menu"
+            ]
+        },
+        "back to main menu": {
+            message: "What would you like to know about?",
+            options: [
+                "Programs & Classes",
+                "Admission Process",
+                "Fee Structure",
+                "School Facilities",
+                "Contact Information"
+            ]
+        }
+    };
 
-    // Send message on Enter key (Shift+Enter for new line)
-    userInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessageToBot();
+    // Function to create option buttons
+    function createOptionButtons(options) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'chat-options';
+        
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.className = 'option-button';
+            button.textContent = option;
+            button.onclick = () => handleOptionClick(option);
+            optionsDiv.appendChild(button);
+        });
+        
+        return optionsDiv;
+    }
+
+    // Handle option click
+    function handleOptionClick(option) {
+        const lowercaseOption = option.toLowerCase();
+        addMessage(option, 'user');
+        
+        if (qaDatabase[lowercaseOption]) {
+            showTypingIndicator()
+                .then(() => {
+                    // Remove "Hello" prefix from subsequent messages
+                    const message = qaDatabase[lowercaseOption].message;
+                    const cleanMessage = message.replace("Hello! 👋\n\n", "");
+                    addMessage(cleanMessage, 'bot');
+                    
+                    if (qaDatabase[lowercaseOption].options) {
+                        const optionsDiv = createOptionButtons(qaDatabase[lowercaseOption].options);
+                        chatMessages.appendChild(optionsDiv);
+                        optionsDiv.style.opacity = '0';
+                        setTimeout(() => optionsDiv.style.opacity = '1', 100);
+                    }
+                });
+        }
+    }
+
+    // Show typing indicator with animation
+    async function showTypingIndicator() {
+        const typingIndicator = addMessage(
+            `<div class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>`, 
+            'bot'
+        );
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        typingIndicator.remove();
+    }
+
+    // Handle text input
+    sendMessage.addEventListener('click', () => {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, 'user');
+            userInput.value = '';
+            handleUserInput(message);
         }
     });
 
-    // Auto-resize textarea
-    userInput.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage.click();
+        }
     });
+
+    // Function to handle user text input
+    function handleUserInput(message) {
+        const lowercaseMsg = message.toLowerCase();
+        let found = false;
+
+        Object.entries(qaDatabase).forEach(([key, value]) => {
+            if (lowercaseMsg.includes(key) && !found) {
+                found = true;
+                showTypingIndicator()
+                    .then(() => {
+                        // Remove "Hello" prefix from subsequent messages
+                        const message = value.message;
+                        const cleanMessage = message.replace("Hello! 👋\n\n", "");
+                        addMessage(cleanMessage, 'bot');
+                        
+                        if (value.options) {
+                            const optionsDiv = createOptionButtons(value.options);
+                            chatMessages.appendChild(optionsDiv);
+                            optionsDiv.style.opacity = '0';
+                            setTimeout(() => optionsDiv.style.opacity = '1', 100);
+                        }
+                    });
+            }
+        });
+
+        if (!found) {
+            showTypingIndicator()
+                .then(() => {
+                    // Keep "Hello" only in welcome message
+                    addMessage(qaDatabase.welcome.message, 'bot');
+                    const optionsDiv = createOptionButtons(qaDatabase.welcome.options);
+                    chatMessages.appendChild(optionsDiv);
+                    optionsDiv.style.opacity = '0';
+                    setTimeout(() => optionsDiv.style.opacity = '1', 100);
+                });
+        }
+    }
+
+    // Initialize chat with welcome message
+    addMessage(qaDatabase.welcome.message, 'bot');
+    const initialOptions = createOptionButtons(qaDatabase.welcome.options);
+    chatMessages.appendChild(initialOptions);
+
+    // Handle notification
+    const chatNotification = document.getElementById('chatNotification');
+    const hasSeenNotification = localStorage.getItem('hasSeenChatNotification');
+
+    if (!hasSeenNotification) {
+        // Show notification after 1 second
+        setTimeout(() => {
+            chatNotification.style.display = 'block';
+        }, 1000);
+
+        // Hide notification when chat is opened
+        chatButton.addEventListener('click', () => {
+            chatNotification.style.display = 'none';
+            localStorage.setItem('hasSeenChatNotification', 'true');
+        });
+
+        // Hide notification after 10 seconds
+        setTimeout(() => {
+            chatNotification.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => {
+                chatNotification.style.display = 'none';
+            }, 500);
+        }, 10000);
+    }
 }); 
