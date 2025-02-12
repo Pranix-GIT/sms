@@ -80,23 +80,47 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (validateStep(currentStep)) {
             const formData = new FormData(form);
+            const submitBtn = form.querySelector('.submit-btn');
             
             try {
+                // Disable submit button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+                
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
                 });
                 
                 if (response.ok) {
                     alert('Application submitted successfully!');
-                    // Redirect to thank you page or handle success
-                    window.location.href = form.querySelector('[name="_next"]').value;
+                    // Reset form
+                    form.reset();
+                    // Reset to first step
+                    currentStep = 1;
+                    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+                    document.querySelector('.form-step[data-step="1"]').classList.add('active');
+                    document.querySelectorAll('.progress-step').forEach(step => step.classList.remove('active', 'completed'));
+                    document.querySelector('.progress-step[data-step="1"]').classList.add('active');
+                    updateProgress(1);
+                    
+                    // Reload page after short delay
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
                 } else {
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
                 alert('There was an error submitting your application. Please try again.');
                 console.error('Submission error:', error);
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application';
             }
         }
     });
