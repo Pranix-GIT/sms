@@ -3129,3 +3129,396 @@ main {
     0%, 60%, 100% { transform: translateY(0); }
     30% { transform: translateY(-4px); }
 }
+
+/* Admission Form Styles */
+.admission-container {
+    max-width: 800px;
+    margin: 6rem auto 2rem; /* Increased top margin */
+    padding: 2rem;
+}
+
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+    padding: 0 1rem;
+}
+
+/* Remove the connecting line */
+.form-progress::before,
+.form-progress::after {
+    display: none;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: #64748b;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-step i {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: #64748b;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.progress-step.active i {
+    border-color: #55B79D;
+    background: #55B79D;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(85, 183, 157, 0.15);
+}
+
+.progress-step span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.progress-step.active span {
+    color: #55B79D;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+/* Add completed step styling */
+.progress-step.completed i {
+    background: #55B79D;
+    border-color: #55B79D;
+    color: white;
+}
+
+.progress-step.completed span {
+    color: #55B79D;
+}
+
+.admission-form {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.form-step {
+    display: none;
+    padding: 2rem;
+}
+
+.form-step.active {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #55B79D;
+    box-shadow: 0 0 0 3px rgba(85, 183, 157, 0.1);
+}
+
+.photo-upload {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px dashed #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+}
+
+.photo-placeholder i {
+    font-size: 2rem;
+}
+
+#photoPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.photo-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.photo-options button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #f8fafc;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.photo-options button:hover {
+    background: #e2e8f0;
+}
+
+.document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.document-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e2e8f0; /* Added border instead of background */
+    background: none; /* Removed background */
+    border-radius: 8px;
+}
+
+.doc-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.doc-info i {
+    font-size: 1.5rem;
+    color: #55B79D;
+}
+
+.doc-info h4 {
+    margin: 0;
+    color: #334155;
+}
+
+.doc-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.doc-upload input {
+    display: none;
+}
+
+.doc-upload label {
+    padding: 0.5rem 1rem;
+    border: 1px solid #55B79D;
+    background: none;
+    color: #55B79D;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.doc-upload label:hover {
+    background: #55B79D;
+    color: white;
+}
+
+.form-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.prev-btn,
+.next-btn,
+.submit-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.prev-btn {
+    background: #f8fafc;
+    color: #475569;
+}
+
+.next-btn,
+.submit-btn {
+    background: #55B79D;
+    color: white;
+}
+
+.prev-btn:hover {
+    background: #e2e8f0;
+}
+
+.next-btn:hover,
+.submit-btn:hover {
+    background: #3d8873;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .admission-container {
+        padding: 1rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .progress-step span {
+        display: none;
+    }
+
+    .form-nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .prev-btn,
+    .next-btn,
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+/* Form validation styles */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Enhance form step transitions */
+.form-step {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.form-step.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Progress step animation */
+.progress-step i {
+    transition: all 0.3s ease-in-out;
+}
+
+.progress-step.active i {
+    transform: scale(1.1);
+}
+
+/* Enhanced document upload styling */
+.upload-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px !important;
+}
+
+.upload-btn i {
+    font-size: 1.1rem;
+}
+
+/* Preview for student photo */
+.doc-preview {
+    display: none;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+.doc-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.doc-preview.active {
+    display: block;
+}
+
+.document-item.has-preview {
+    align-items: flex-start;
+}
