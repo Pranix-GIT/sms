@@ -199,4 +199,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Add this to your existing script.js
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Add your newsletter signup logic here
+        alert('Thank you for subscribing! You will receive updates from SSBA.');
+        this.reset();
+    });
 }); 
